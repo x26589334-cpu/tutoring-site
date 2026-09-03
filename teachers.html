@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>선생님 찾기 | 공부의 온도 — 방문·화상과외 선생님 750명</title>
+<meta name="description" content="공부의 온도와 함께하는 선생님 750명을 방식·과목·지역으로 찾아보세요. 집으로 오는 방문과외, 전국 어디서나 되는 화상과외 선생님을 한 곳에서 비교할 수 있습니다.">
+<link rel="canonical" href="https://firststudy.co.kr/teachers.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="선생님 찾기 | 공부의 온도">
+<meta property="og:description" content="방식·과목·지역으로 찾는 방문·화상과외 선생님 750명.">
+<meta property="og:url" content="https://firststudy.co.kr/teachers.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://firststudy.co.kr/apple-touch-icon.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#FDFBF7">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+<!-- ============ 헤더 ============ -->
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="logo-dot"></span>공부의 온도</a>
+    <nav class="nav-menu" id="menu">
+      <a href="index.html#visit">방문과외</a>
+      <a href="index.html#online">화상과외</a>
+      <a href="index.html#center">학습센터</a>
+      <a href="teachers.html">선생님 찾기</a>
+      <a href="status.html">수업 현황</a>
+    </nav>
+    <a href="index.html#contact" class="btn btn-main nav-cta">무료 상담</a>
+    <button class="burger" id="burger" aria-label="메뉴 열기">☰</button>
+  </div>
+</header>
+
+<!-- ============ 히어로 + 검색 ============ -->
+<section class="t-hero">
+  <div class="wrap">
+    <p class="eyebrow">선생님 찾기</p>
+    <h1>먼저 <em>방식</em>을 고르고,<br>그다음 선생님을 만나세요</h1>
+    <p>지금 <span class="cnt" id="tTotal">750</span>분의 선생님이 함께하고 있습니다.<br>집으로 오는 수업과 화면으로 만나는 수업, 아이에게 맞는 쪽부터 골라 보세요.</p>
+
+    <div class="t-search">
+      <input id="tSearch" type="search" autocomplete="off" aria-label="선생님 검색"
+             placeholder="동네 · 학교 · 과목으로 검색 (예: 분당 수학, 목동 영어)">
+      <button type="button" class="btn btn-main" id="tSearchBtn">검색</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 필터 ============ -->
+<section style="padding-bottom:10px">
+  <div class="wrap">
+    <div class="t-ways" id="fWay"></div>
+
+    <div class="t-filters">
+      <div class="t-row"><span class="lb">과목</span><div class="t-chips" id="fSubj"></div></div>
+      <div class="t-row"><span class="lb">지역</span><div class="t-chips" id="fSido"></div></div>
+      <div class="t-row"><span class="lb">선생님</span><div class="t-chips" id="fEtc"></div>
+        <button type="button" class="t-reset" id="fReset">조건 초기화</button></div>
+    </div>
+
+    <p class="t-count" id="tCount"></p>
+    <div class="t-grid" id="tGrid" aria-live="polite"></div>
+    <button type="button" class="btn btn-ghost t-more" id="tMore" hidden>선생님 더 보기</button>
+  </div>
+</section>
+
+<!-- ============ 상담 유도 ============ -->
+<section id="contact" style="background:var(--bg-soft);margin-top:70px">
+  <div class="wrap" style="text-align:center;padding:70px 0">
+    <h2 class="sec-title">누구를 골라야 할지 모르겠다면</h2>
+    <p class="sec-desc">아이 이야기를 들려주시면, 성향과 일정에 맞는 선생님을 저희가 먼저 추려서 알려드립니다.</p>
+    <a href="index.html#contact" class="btn btn-main" style="margin-top:26px;padding:16px 44px">무료 상담 신청하기</a>
+  </div>
+</section>
+
+<!-- ============ 푸터 ============ -->
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="logo"><span class="logo-dot"></span>공부의 온도</div>
+      <div>아이에게 맞는 공부 방식을 찾아 주는 곳</div>
+    </div>
+    <div>
+      <div class="foot-links">
+        <a href="index.html#visit">방문과외</a>
+        <a href="index.html#online">화상과외</a>
+        <a href="index.html#center">학습센터</a>
+        <a href="teachers.html">선생님 찾기</a>
+        <a href="status.html">수업 현황</a>
+      </div>
+      <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="teachers-data.js?v=1"></script>
+<script defer src="teachers-search.js?v=1"></script>
+<script>
+/* 모바일 메뉴 */
+var burger = document.getElementById('burger');
+var menu = document.getElementById('menu');
+burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
+menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') menu.classList.remove('open'); });
+
+(function(){
+  var ALL = window.TEACHERS || [];
+  var PER = 30;                 /* 티칭코칭은 24명 페이지네이션, 여기는 30명씩 '더 보기' */
+  var shown = PER;
+
+  var grid    = document.getElementById('tGrid');
+  var countEl = document.getElementById('tCount');
+  var moreEl  = document.getElementById('tMore');
+  var searchI = document.getElementById('tSearch');
+
+  var state = { way:'전체', subj:'전체', sido:'전체', gender:'전체', kid:false, q:'' };
+  var cur = ALL;
+
+  document.getElementById('tTotal').textContent = ALL.length;
+
+  /* ---------- 필터 UI 생성 ---------- */
+  function countBy(fn){ var m={}; ALL.forEach(function(t){ var k=fn(t); if(k) m[k]=(m[k]||0)+1; }); return m; }
+
+  var wayCount = { '전체':ALL.length, '방문':0, '화상':0 };
+  ALL.forEach(function(t){
+    if(t.c.indexOf('방문')>=0) wayCount['방문']++;
+    if(t.c.indexOf('화상')>=0) wayCount['화상']++;
+  });
+  var WAYS = [
+    { k:'전체', label:'전체 보기' },
+    { k:'방문', label:'방문과외' },
+    { k:'화상', label:'화상과외' }
+  ];
+  document.getElementById('fWay').innerHTML = WAYS.map(function(w){
+    return '<button type="button" class="t-way' + (w.k===state.way ? ' on' : '') + '" data-way="' + w.k + '">'
+         + '<b>' + w.label + '</b><span class="n">' + wayCount[w.k] + '명</span></button>';
+  }).join('');
+
+  var SUBJ = ['국어','영어','수학','과학','사회','기타'];
+  document.getElementById('fSubj').innerHTML =
+    ['전체'].concat(SUBJ).map(function(s){
+      return '<button type="button" class="t-chip' + (s==='전체' ? ' on' : '') + '" data-subj="' + s + '">' + s + '</button>';
+    }).join('');
+
+  /* sd 는 "경기,충남" 처럼 여러 시도가 붙어 오는 경우가 있어 쪼개서 센다 */
+  function sidoList(t){ return t.sd ? t.sd.split(',') : []; }
+  var sidoCount = {};
+  ALL.forEach(function(t){ sidoList(t).forEach(function(s){ sidoCount[s] = (sidoCount[s]||0)+1; }); });
+  var SIDO = Object.keys(sidoCount).sort(function(a,b){ return sidoCount[b]-sidoCount[a]; });
+  document.getElementById('fSido').innerHTML =
+    '<button type="button" class="t-chip on" data-sido="전체">전국</button>'
+    + SIDO.map(function(s){
+        return '<button type="button" class="t-chip" data-sido="' + s + '">' + s
+             + ' <span style="opacity:.55">' + sidoCount[s] + '</span></button>';
+      }).join('');
+
+  document.getElementById('fEtc').innerHTML =
+      '<button type="button" class="t-chip on" data-gender="전체">성별 무관</button>'
+    + '<button type="button" class="t-chip" data-gender="여">여선생님</button>'
+    + '<button type="button" class="t-chip" data-gender="남">남선생님</button>'
+    + '<button type="button" class="t-chip" data-kid="1">유아·아동 전문</button>';
+
+  /* ---------- 필터 동작 ---------- */
+  function pick(container, attr, val){
+    var list = container.querySelectorAll('[data-' + attr + ']');
+    for(var i=0;i<list.length;i++){
+      list[i].classList.toggle('on', list[i].getAttribute('data-' + attr) === val);
+    }
+  }
+
+  document.getElementById('fWay').addEventListener('click', function(e){
+    var b = e.target.closest('[data-way]'); if(!b) return;
+    state.way = b.getAttribute('data-way'); pick(this,'way',state.way); render(true);
+  });
+  document.getElementById('fSubj').addEventListener('click', function(e){
+    var b = e.target.closest('[data-subj]'); if(!b) return;
+    state.subj = b.getAttribute('data-subj'); pick(this,'subj',state.subj); render(true);
+  });
+  document.getElementById('fSido').addEventListener('click', function(e){
+    var b = e.target.closest('[data-sido]'); if(!b) return;
+    state.sido = b.getAttribute('data-sido'); pick(this,'sido',state.sido); render(true);
+  });
+  document.getElementById('fEtc').addEventListener('click', function(e){
+    var b = e.target.closest('[data-gender],[data-kid]'); if(!b) return;
+    if(b.hasAttribute('data-kid')){
+      state.kid = !state.kid; b.classList.toggle('on', state.kid);
+    } else {
+      state.gender = b.getAttribute('data-gender'); pick(this,'gender',state.gender);
+    }
+    render(true);
+  });
+
+  document.getElementById('fReset').addEventListener('click', function(){
+    state = { way:'전체', subj:'전체', sido:'전체', gender:'전체', kid:false, q:'' };
+    searchI.value = '';
+    pick(document.getElementById('fWay'),'way','전체');
+    pick(document.getElementById('fSubj'),'subj','전체');
+    pick(document.getElementById('fSido'),'sido','전체');
+    pick(document.getElementById('fEtc'),'gender','전체');
+    document.querySelector('[data-kid]').classList.remove('on');
+    render(true);
+  });
+
+  function doSearch(){ state.q = searchI.value.trim().toLowerCase(); render(true); }
+  document.getElementById('tSearchBtn').addEventListener('click', doSearch);
+  searchI.addEventListener('keydown', function(e){ if(e.key === 'Enter') doSearch(); });
+  searchI.addEventListener('input', function(){ if(!searchI.value) doSearch(); });
+
+  /* ---------- 매칭 ---------- */
+  function match(t){
+    if(state.way !== '전체' && t.c.indexOf(state.way) < 0) return false;
+    if(state.subj !== '전체' && t.s.indexOf(state.subj) < 0) return false;
+    if(state.sido !== '전체' && sidoList(t).indexOf(state.sido) < 0) return false;
+    if(state.gender !== '전체' && t.g !== state.gender) return false;
+    if(state.kid && !t.k) return false;
+    if(state.q){
+      var hay = (t.n + ' ' + t.c + ' ' + t.s.join(' ') + ' ' + t.sd + ' ' + t.r + ' ' + t.tag).toLowerCase();
+      var idx = (window.TSEARCH && window.TSEARCH[t.i]) || '';
+      var words = state.q.split(/\s+/);
+      for(var i=0;i<words.length;i++){
+        if(hay.indexOf(words[i]) < 0 && idx.indexOf(words[i]) < 0) return false;
+      }
+    }
+    return true;
+  }
+
+  /* ---------- 카드 ---------- */
+  function wayClass(c){ return c === '방문+화상' ? 'both' : c; }
+  function whereText(t){
+    if(!t.r) return '전국 어디서나 · 화상 수업';
+    var parts = t.r.split('|');
+    var head = parts.slice(0,2).join(' · ');
+    return head + (parts.length > 2 ? ' 외 ' + (parts.length - 2) + '곳' : '');
+  }
+  function card(t){
+    var w = wayClass(t.c);
+    var subs = t.s.map(function(s,i){
+      return '<span class="t-sub">' + s + (t.gr[i] ? ' ' + t.gr[i] : '') + '</span>';
+    }).join('');
+    return '<a class="t-card w-' + w + '" href="t/' + t.i + '.html">'
+      + '<span class="t-badge w-' + w + '">' + t.c + '과외</span>'
+      + '<p class="t-tag">' + t.tag + '</p>'
+      + '<p class="t-name"><b>' + t.n + '</b> 선생님' + (t.g ? ' · ' + t.g : '') + '</p>'
+      + '<div class="t-subs">' + subs + (t.k ? '<span class="t-kid">유아·아동</span>' : '') + '</div>'
+      + '<p class="t-where">📍 ' + whereText(t) + '</p>'
+      + '</a>';
+  }
+
+  /* ---------- 렌더 ---------- */
+  function render(reset){
+    if(reset) shown = PER;
+    cur = ALL.filter(match);
+    if(!cur.length){
+      countEl.textContent = '';
+      grid.innerHTML = '<div class="t-empty">조건에 맞는 선생님이 아직 없어요.<br>'
+        + '조건을 조금 넓히거나, <a href="index.html#contact" style="color:var(--visit);font-weight:700">무료 상담</a>으로 문의해 주세요.</div>';
+      moreEl.hidden = true; return;
+    }
+    countEl.innerHTML = '조건에 맞는 선생님 <b>' + cur.length + '명</b>';
+    grid.innerHTML = cur.slice(0, shown).map(card).join('');
+    moreEl.hidden = cur.length <= shown;
+    moreEl.textContent = '선생님 더 보기 (' + Math.min(PER, cur.length - shown) + '명)';
+  }
+  moreEl.addEventListener('click', function(){ shown += PER; render(false); });
+
+  /* URL 파라미터로 방식 프리셋 (?way=방문) */
+  var qp = new URLSearchParams(location.search);
+  if(qp.get('way') === '방문' || qp.get('way') === '화상'){
+    state.way = qp.get('way'); pick(document.getElementById('fWay'),'way',state.way);
+  }
+
+  render(true);
+  /* 검색 색인은 defer 로 늦게 도착하므로, 도착 후 검색 중이면 다시 그린다 */
+  window.addEventListener('load', function(){ if(state.q) render(true); });
+})();
+</script>
+</body>
+</html>

@@ -219,3 +219,114 @@ footer{background:#F5F0E8;padding:60px 0 46px}
 .foot{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;font-size:13.5px;color:var(--ink-light);font-weight:300}
 .foot .logo{margin-bottom:12px;color:var(--ink)}
 .foot-links{display:flex;gap:20px;flex-wrap:wrap}
+
+/* ============================================================
+   선생님 찾기 (teachers.html) · 선생님 상세 (t/*.html)
+   ※ 티칭코칭과 달리 "수업 방식"을 1차 축으로 삼아 브랜드 3색으로 구분한다.
+   ============================================================ */
+.t-hero{padding:74px 0 30px;text-align:center}
+.t-hero h1{font-size:clamp(27px,3.6vw,40px);line-height:1.32;margin-bottom:14px}
+.t-hero p{color:var(--ink-light);font-size:16px}
+.t-hero .cnt{color:var(--visit);font-weight:700}
+
+/* 검색 */
+.t-search{display:flex;gap:10px;max-width:620px;margin:26px auto 0}
+.t-search input{flex:1;padding:15px 20px;border:1px solid var(--line);border-radius:999px;background:#fff;
+  font-family:inherit;font-size:15px;color:var(--ink);box-shadow:var(--shadow-sm)}
+.t-search input:focus{outline:none;border-color:var(--visit)}
+.t-search .btn{padding:15px 28px;white-space:nowrap}
+
+/* 1차 축 — 수업 방식 세그먼트 */
+.t-ways{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:34px 0 8px}
+.t-way{padding:14px 30px;border-radius:18px;border:1.5px solid var(--line);background:#fff;cursor:pointer;
+  font-family:inherit;font-size:15px;color:var(--ink-light);transition:.2s;display:flex;align-items:center;gap:9px}
+.t-way b{font-weight:700;color:var(--ink)}
+.t-way .n{font-size:13px;opacity:.7}
+.t-way:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.t-way.on{color:var(--ink);box-shadow:var(--shadow-sm)}
+.t-way[data-way="전체"].on{border-color:var(--ink-light);background:#fff}
+.t-way[data-way="방문"].on{border-color:var(--visit);background:var(--visit-soft)}
+.t-way[data-way="화상"].on{border-color:var(--online);background:var(--online-soft)}
+
+/* 2차 필터 */
+.t-filters{max-width:940px;margin:16px auto 0;background:#fff;border:1px solid var(--line);
+  border-radius:22px;padding:18px 22px;box-shadow:var(--shadow-sm)}
+.t-row{display:flex;align-items:flex-start;gap:14px;padding:9px 0}
+.t-row+.t-row{border-top:1px dashed var(--line)}
+.t-row .lb{flex:0 0 58px;font-size:13px;color:var(--ink-light);padding-top:6px}
+.t-chips{display:flex;flex-wrap:wrap;gap:7px}
+.t-chip{padding:6px 15px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;
+  font-family:inherit;font-size:13.5px;color:var(--ink-light);transition:.15s}
+.t-chip:hover{border-color:var(--ink-light);color:var(--ink)}
+.t-chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.t-reset{margin-left:auto;font-size:13px;color:var(--ink-light);background:none;border:none;cursor:pointer;
+  font-family:inherit;text-decoration:underline;padding-top:6px}
+
+.t-count{text-align:center;color:var(--ink-light);font-size:14px;margin:26px 0 18px}
+.t-count b{color:var(--ink)}
+
+/* 카드 그리드 — tagline 을 헤드라인으로 세운다 */
+.t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.t-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:20px;
+  padding:24px 24px 22px 28px;overflow:hidden;transition:.2s;display:flex;flex-direction:column;gap:12px}
+.t-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--ink-light)}
+.t-card.w-방문::before{background:var(--visit)}
+.t-card.w-화상::before{background:var(--online)}
+.t-card.w-both::before{background:linear-gradient(180deg,var(--visit),var(--online))}
+.t-card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:transparent}
+.t-badge{align-self:flex-start;font-size:11.5px;padding:5px 12px;border-radius:999px;font-weight:700;letter-spacing:.02em}
+.t-badge.w-방문{background:var(--visit-soft);color:#B96A48}
+.t-badge.w-화상{background:var(--online-soft);color:#4B7CB8}
+.t-badge.w-both{background:var(--center-soft);color:#3F8C6E}
+.t-tag{font-family:'Gowun Dodum',sans-serif;font-size:17.5px;line-height:1.45;color:var(--ink)}
+.t-name{font-size:14px;color:var(--ink-light)}
+.t-name b{color:var(--ink);font-weight:700;font-size:15px}
+.t-subs{display:flex;flex-wrap:wrap;gap:6px}
+.t-sub{font-size:12px;padding:4px 10px;border-radius:8px;background:var(--bg-soft);color:var(--ink-light)}
+.t-where{font-size:13px;color:var(--ink-light);margin-top:auto;padding-top:4px}
+.t-kid{font-size:11.5px;padding:4px 10px;border-radius:999px;background:var(--center-soft);color:#3F8C6E;font-weight:700}
+
+.t-more{display:block;margin:34px auto 0;padding:15px 44px}
+.t-empty{grid-column:1/-1;text-align:center;padding:60px 20px;color:var(--ink-light);line-height:1.9}
+
+/* 선생님 상세 */
+.td-hero{padding:70px 0 24px}
+.td-back{font-size:14px;color:var(--ink-light);display:inline-block;margin-bottom:20px}
+.td-back:hover{color:var(--ink)}
+.td-top{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.td-ini{width:74px;height:74px;border-radius:24px;display:grid;place-items:center;font-size:29px;
+  font-family:'Gowun Dodum',sans-serif;color:#fff;flex:0 0 auto}
+.td-h1{font-size:clamp(24px,3vw,33px);line-height:1.35;margin-bottom:8px}
+.td-sub{color:var(--ink-light);font-size:15px}
+.td-body{display:grid;grid-template-columns:1.55fr 1fr;gap:24px;align-items:start;margin-top:34px}
+.td-box{background:#fff;border:1px solid var(--line);border-radius:22px;padding:28px 30px;box-shadow:var(--shadow-sm)}
+.td-box h2{font-size:18px;margin-bottom:14px}
+.td-intro{color:var(--ink);line-height:1.95;font-size:15.3px;white-space:pre-line}
+.td-facts{list-style:none;display:flex;flex-direction:column;gap:0}
+.td-facts li{display:flex;gap:14px;padding:13px 0;font-size:14.5px;border-bottom:1px dashed var(--line)}
+.td-facts li:last-child{border-bottom:none}
+.td-facts i{flex:0 0 62px;font-style:normal;color:var(--ink-light);font-size:13.5px}
+.td-facts span{color:var(--ink);line-height:1.7}
+.td-cta{margin-top:20px;text-align:center}
+.td-cta .btn{width:100%;padding:16px}
+.td-note{font-size:12.5px;color:var(--ink-light);margin-top:12px;line-height:1.7}
+.td-schools{font-size:13.5px;color:var(--ink-light);line-height:2}
+
+@media(max-width:900px){
+  .t-grid{grid-template-columns:repeat(2,1fr)}
+  .td-body{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .t-grid{grid-template-columns:1fr}
+  .t-search{flex-direction:column;border-radius:20px}
+  .t-search input,.t-search .btn{border-radius:16px}
+  .t-way{padding:12px 20px;font-size:14px}
+  .t-row{flex-direction:column;gap:8px}
+  .t-row .lb{flex:none}
+  .t-reset{margin-left:0}
+}
+
+/* 선생님 상세 → 상담 폼으로 넘어왔을 때 표시되는 안내 */
+.picked{background:var(--visit-soft);border:1px solid var(--visit);border-radius:16px;
+  padding:14px 20px;margin-bottom:18px;font-size:14.5px;color:var(--ink);line-height:1.7}
+.picked a{color:#B96A48;text-decoration:underline;margin-left:4px}
