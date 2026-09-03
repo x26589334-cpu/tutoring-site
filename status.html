@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이번 달 수업 현황 | 공부의 온도</title>
+<meta name="description" content="공부의 온도에서 현재 모집 중인 수업과 진행 중인 수업을 투명하게 공개합니다. 방문과외·화상과외·학습센터별로 확인해 보세요.">
+<link rel="canonical" href="https://firststudy.co.kr/status.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="이번 달 수업 현황 | 공부의 온도">
+<meta property="og:description" content="현재 모집 중인 수업과 진행 중인 수업을 투명하게 공개합니다.">
+<meta property="og:url" content="https://firststudy.co.kr/status.html">
+<meta property="og:locale" content="ko_KR">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#FDFBF7">
+<meta property="og:image" content="https://firststudy.co.kr/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+
+<!-- ============ 헤더 ============ -->
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="logo-dot"></span>공부의 온도</a>
+    <nav class="nav-menu" id="menu">
+      <a href="index.html#visit">방문과외</a>
+      <a href="index.html#online">화상과외</a>
+      <a href="index.html#center">학습센터</a>
+      <a href="status.html">수업 현황</a>
+    </nav>
+    <a href="index.html#contact" class="btn btn-main nav-cta">무료 상담</a>
+    <button class="burger" id="burger" aria-label="메뉴 열기">☰</button>
+  </div>
+</header>
+
+<!-- ============ 수업 현황 ============ -->
+<section id="status" class="status">
+  <div class="wrap">
+    <div class="center-txt">
+      <span class="eyebrow">CLASS STATUS</span>
+      <h1 class="sec-title">이번 달 수업 현황</h1>
+      <p class="sec-desc">현재 모집 중인 수업과 진행 중인 수업을 투명하게 공개합니다.</p>
+    </div>
+
+    <!-- 숫자 요약 : 아래 숫자만 바꿔 주세요 -->
+    <div class="stat-row">
+      <div class="stat"><b>128</b><span>진행 중인 수업</span></div>
+      <div class="stat"><b>46</b><span>함께하는 선생님</span></div>
+      <div class="stat"><b>12</b><span>이번 주 모집 중</span></div>
+      <div class="stat"><b>97%</b><span>재등록 만족도</span></div>
+    </div>
+
+    <!-- 필터 -->
+    <div class="filters">
+      <button class="filter active" data-filter="all">전체</button>
+      <button class="filter" data-filter="visit">방문과외</button>
+      <button class="filter" data-filter="online">화상과외</button>
+      <button class="filter" data-filter="center">학습센터</button>
+    </div>
+
+    <!-- 수업 카드 : 아래 한 블록을 복사해서 계속 늘리시면 됩니다 -->
+    <div class="class-grid" id="classGrid">
+
+      <div class="class-card" data-type="visit">
+        <div class="cc-top"><span class="cc-type">방문과외</span><span class="cc-state"><i class="dot open"></i>모집중</span></div>
+        <h4>중2 수학 · 도형 집중</h4>
+        <div class="cc-meta">
+          <div><i>지역</i>서울 강동구</div>
+          <div><i>일정</i>화·목 19:00</div>
+          <div><i>선생님</i>김○○ 선생님</div>
+        </div>
+      </div>
+
+      <div class="class-card" data-type="online">
+        <div class="cc-top"><span class="cc-type">화상과외</span><span class="cc-state"><i class="dot open"></i>모집중</span></div>
+        <h4>고1 영어 · 내신 대비</h4>
+        <div class="cc-meta">
+          <div><i>지역</i>전국 (온라인)</div>
+          <div><i>일정</i>월·수·금 21:00</div>
+          <div><i>선생님</i>이○○ 선생님</div>
+        </div>
+      </div>
+
+      <div class="class-card" data-type="center">
+        <div class="cc-top"><span class="cc-type">학습센터</span><span class="cc-state"><i class="dot soon"></i>대기 2명</span></div>
+        <h4>초6 국어 · 독해 그룹반</h4>
+        <div class="cc-meta">
+          <div><i>지역</i>본원 2층 A강의실</div>
+          <div><i>일정</i>토 10:00</div>
+          <div><i>선생님</i>박○○ 선생님</div>
+        </div>
+      </div>
+
+      <div class="class-card" data-type="visit">
+        <div class="cc-top"><span class="cc-type">방문과외</span><span class="cc-state"><i class="dot"></i>진행중</span></div>
+        <h4>초4 전과목 · 학습습관</h4>
+        <div class="cc-meta">
+          <div><i>지역</i>경기 하남시</div>
+          <div><i>일정</i>주 2회 16:00</div>
+          <div><i>선생님</i>정○○ 선생님</div>
+        </div>
+      </div>
+
+      <div class="class-card" data-type="online">
+        <div class="cc-top"><span class="cc-type">화상과외</span><span class="cc-state"><i class="dot"></i>진행중</span></div>
+        <h4>중3 과학 · 개념 완성</h4>
+        <div class="cc-meta">
+          <div><i>지역</i>전국 (온라인)</div>
+          <div><i>일정</i>화·목 20:00</div>
+          <div><i>선생님</i>최○○ 선생님</div>
+        </div>
+      </div>
+
+      <div class="class-card" data-type="center">
+        <div class="cc-top"><span class="cc-type">학습센터</span><span class="cc-state"><i class="dot open"></i>모집중</span></div>
+        <h4>고2 수학 · 주말 자습 코칭</h4>
+        <div class="cc-meta">
+          <div><i>지역</i>본원 3층 자습실</div>
+          <div><i>일정</i>토·일 13:00</div>
+          <div><i>선생님</i>한○○ 선생님</div>
+        </div>
+      </div>
+
+    </div>
+    <p class="status-note">※ 현황은 매주 월요일 기준으로 업데이트됩니다. 원하는 시간대가 없다면 상담으로 문의해 주세요.</p>
+    <div style="text-align:center;margin-top:34px">
+      <a href="index.html#contact" class="btn btn-main">무료 상담 신청하러 가기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 푸터 ============ -->
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="logo"><span class="logo-dot"></span>공부의 온도</div>
+      <div>아이에게 맞는 공부 방식을 찾아 주는 곳</div>
+    </div>
+    <div>
+      <div class="foot-links">
+        <a href="index.html#visit">방문과외</a>
+        <a href="index.html#online">화상과외</a>
+        <a href="index.html#center">학습센터</a>
+        <a href="status.html">수업 현황</a>
+      </div>
+      <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* 모바일 메뉴 */
+var burger = document.getElementById('burger');
+var menu = document.getElementById('menu');
+burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
+menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') menu.classList.remove('open'); });
+
+/* 수업 현황 필터 */
+var filters = document.querySelectorAll('.filter');
+var cards = document.querySelectorAll('.class-card');
+filters.forEach(function(btn){
+  btn.addEventListener('click', function(){
+    filters.forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.getAttribute('data-filter');
+    cards.forEach(function(c){
+      c.style.display = (f === 'all' || c.getAttribute('data-type') === f) ? '' : 'none';
+    });
+  });
+});
+
+/* 스크롤 등장 효과 */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting){
+      en.target.style.opacity = 1;
+      en.target.style.transform = 'none';
+      io.unobserve(en.target);
+    }
+  });
+}, {threshold: .12});
+document.querySelectorAll('.stat, .class-card').forEach(function(el){
+  el.style.opacity = 0;
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity .7s ease, transform .7s ease';
+  io.observe(el);
+});
+</script>
+</body>
+</html>
