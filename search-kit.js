@@ -299,6 +299,7 @@
 
   w.SearchKit = {
     norm: norm, nospace: nospace, hay: hay, match: match,
-    indexer: indexer, related: related, popular: popular, suggest: suggest, chips: chips
+    indexer: indexer, related: related, popular: popular, suggest: suggest,
+    chips: chips, style: injectCSS, esc: esc
   };
 })(window, document);
