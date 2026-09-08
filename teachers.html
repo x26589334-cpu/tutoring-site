@@ -72,6 +72,7 @@
     </div>
 
     <p class="t-count" id="tCount"></p>
+    <div id="tRelated" hidden></div>
     <div class="t-grid" id="tGrid" aria-live="polite"></div>
     <button type="button" class="btn btn-ghost t-more" id="tMore" hidden>선생님 더 보기</button>
   </div>
@@ -107,6 +108,7 @@
 
 <script src="teachers-data.js?v=1"></script>
 <script defer src="teachers-search.js?v=1"></script>
+<script src="search-kit.js?v=1"></script>
 <script>
 /* 모바일 메뉴 */
 var burger = document.getElementById('burger');
@@ -224,15 +226,43 @@ menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') menu.cl
     if(state.sido !== '전체' && sidoList(t).indexOf(state.sido) < 0) return false;
     if(state.gender !== '전체' && t.g !== state.gender) return false;
     if(state.kid && !t.k) return false;
-    if(state.q){
-      var hay = (t.n + ' ' + t.c + ' ' + t.s.join(' ') + ' ' + t.sd + ' ' + t.r + ' ' + t.tag).toLowerCase();
-      var idx = (window.TSEARCH && window.TSEARCH[t.i]) || '';
-      var words = state.q.split(/\s+/);
-      for(var i=0;i<words.length;i++){
-        if(hay.indexOf(words[i]) < 0 && idx.indexOf(words[i]) < 0) return false;
-      }
-    }
+    /* 검색어: 낱말이 전부 들어 있어야 하고, 띄어쓰기는 무시한다 (search-kit.js) */
+    if(state.q && !SearchKit.match(hayOf(t), state.q)) return false;
     return true;
+  }
+
+  /* 검색 대상 문자열 캐시. 색인(teachers-search.js)이 늦게 오므로 도착 후 clear() 한다 */
+  var hayOf = SearchKit.indexer(
+    function(t){ return t.i; },
+    function(t){
+      var idx = (window.TSEARCH && window.TSEARCH[t.i]) || '';
+      return t.n + ' ' + t.c + ' ' + t.s.join(' ') + ' ' + t.sd + ' ' + t.r + ' ' + t.tag + ' ' + idx;
+    }
+  );
+
+  /* 연관 검색어 — 결과에 많이 나오는 과목·지역·수업방식을 검색어에 덧붙여 제안 */
+  var relEl = document.getElementById('tRelated');
+  var REL_FIELDS = [
+    's', 'sd', 'c',
+    function(t){
+      return (t.r || '').split('|').map(function(x){
+        var p = x.trim().split(' ');
+        return p.slice(-2).join(' ');
+      });
+    }
+  ];
+  function renderRelated(list){
+    if(!state.q){ SearchKit.chips(relEl, [], null); return; }
+    var found = list.length > 0;
+    var items = found
+      ? SearchKit.related(list, state.q, REL_FIELDS, { limit: 6 })
+      : SearchKit.suggest(ALL, hayOf, state.q, REL_FIELDS, { limit: 6 });
+    SearchKit.chips(relEl, items, function(term){
+      searchI.value = term;
+      state.q = term;
+      render(true);
+      searchI.focus();
+    }, found ? '연관 검색어' : '이렇게 찾아보세요');
   }
 
   /* ---------- 카드 ---------- */
@@ -265,12 +295,17 @@ menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') menu.cl
       countEl.textContent = '';
       grid.innerHTML = '<div class="t-empty">조건에 맞는 선생님이 아직 없어요.<br>'
         + '조건을 조금 넓히거나, <a href="index.html#contact" style="color:var(--visit);font-weight:700">무료 상담</a>으로 문의해 주세요.</div>';
-      moreEl.hidden = true; return;
+      moreEl.hidden = true; moreEl.style.display = 'none';
+      renderRelated(cur);
+      return;
     }
     countEl.innerHTML = '조건에 맞는 선생님 <b>' + cur.length + '명</b>';
     grid.innerHTML = cur.slice(0, shown).map(card).join('');
+    /* .t-more 는 style.css 에서 display:block 이라 hidden 속성만으로는 안 숨는다 */
     moreEl.hidden = cur.length <= shown;
+    moreEl.style.display = moreEl.hidden ? 'none' : 'block';
     moreEl.textContent = '선생님 더 보기 (' + Math.min(PER, cur.length - shown) + '명)';
+    renderRelated(cur);
   }
   moreEl.addEventListener('click', function(){ shown += PER; render(false); });
 
@@ -279,10 +314,15 @@ menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') menu.cl
   if(qp.get('way') === '방문' || qp.get('way') === '화상'){
     state.way = qp.get('way'); pick(document.getElementById('fWay'),'way',state.way);
   }
+  /* 다른 페이지에서 넘어온 검색어(?q=) 자동 반영 */
+  if(qp.get('q')){
+    state.q = qp.get('q').trim().toLowerCase();
+    searchI.value = qp.get('q').trim();
+  }
 
   render(true);
   /* 검색 색인은 defer 로 늦게 도착하므로, 도착 후 검색 중이면 다시 그린다 */
-  window.addEventListener('load', function(){ if(state.q) render(true); });
+  window.addEventListener('load', function(){ hayOf.clear(); if(state.q) render(true); });
 })();
 </script>
 </body>
