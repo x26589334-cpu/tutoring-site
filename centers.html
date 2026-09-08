@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>학습센터 찾기 | 공부의 온도 — 전국 205개 센터</title>
+<meta name="description" content="집 근처 학습센터를 찾아보세요. 정해진 시간에 나와 편하게 공부하고, 막히면 바로 물어볼 수 있는 곳. 전국 205개 센터를 지역·학교·동네 이름으로 검색할 수 있습니다.">
+<link rel="canonical" href="https://firststudy.co.kr/centers.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="학습센터 찾기 | 공부의 온도">
+<meta property="og:description" content="집 근처에서 편하게 공부할 수 있는 학습센터 205곳을 찾아보세요.">
+<meta property="og:url" content="https://firststudy.co.kr/centers.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://firststudy.co.kr/apple-touch-icon.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#FDFBF7">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+</head>
+<body>
+
+<!-- ============ 헤더 ============ -->
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="logo-dot"></span>공부의 온도</a>
+    <nav class="nav-menu" id="menu">
+      <div class="nav-item">
+        <a class="nav-top">과외 <span class="caret">▼</span></a>
+        <div class="nav-sub">
+          <a href="index.html#visit"><span class="dot visit"></span>방문과외</a>
+          <a href="index.html#online"><span class="dot online"></span>화상과외</a>
+        </div>
+      </div>
+      <a href="centers.html">학습센터</a>
+      <a href="teachers.html">선생님 찾기</a>
+      <a href="status.html">수업 현황</a>
+    </nav>    <a href="index.html#contact" class="btn btn-main nav-cta">무료 상담</a>
+    <button class="burger" id="burger" aria-label="메뉴 열기">☰</button>
+  </div>
+</header>
+
+<!-- ============ 히어로 ============ -->
+<section class="c-hero">
+  <div class="wrap">
+    <p class="eyebrow">학습센터</p>
+    <h1>그냥 와서,<br><em>편하게 공부하는 곳</em></h1>
+    <p>정해진 시간에 나와 앉으면 그날 공부가 시작됩니다.<br>
+      막히면 바로 물어보고, 수업이 끝나도 자습실에 남아 하던 걸 마저 하면 됩니다.<br>
+      전국 <span class="cnt" id="cTotal">205</span>곳 중 집에서 가까운 곳을 찾아보세요.</p>
+
+    <div class="c-finder">
+      <div class="c-search">
+        <input type="search" id="center-search" autocomplete="off" aria-label="센터 검색"
+               placeholder="검색 (예: 분당 불곡중, 신정동, 목일중학교, 일산)">
+      </div>
+      <div class="c-regions" id="center-regions" aria-label="지역 필터"></div>
+      <p class="c-count" id="center-count"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 센터 목록 ============ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="c-grid" id="center-grid" aria-live="polite"></div>
+    <div class="c-empty" id="center-empty" hidden>검색 결과가 없습니다.<br>다른 검색어나 지역을 선택해 보세요.</div>
+    <button type="button" class="btn btn-ghost c-more" id="center-more" hidden>더 보기</button>
+  </div>
+</section>
+
+<!-- ============ 이런 곳이에요 ============ -->
+<section style="background:var(--bg-soft);margin-top:70px">
+  <div class="wrap" style="padding:70px 0">
+    <h2 class="sec-title" style="text-align:center">센터에서는 이렇게 지냅니다</h2>
+    <p class="sec-desc" style="text-align:center;margin-bottom:38px">혼자 있으면 자꾸 미루는 아이도, 자리에 앉으면 달라집니다.</p>
+    <div class="mini-grid">
+      <div class="mini"><strong>고정 등원 루틴</strong><span>공부 시간이 몸에 배도록</span></div>
+      <div class="mini"><strong>질문 선생님 상주</strong><span>막히면 바로 해결</span></div>
+      <div class="mini"><strong>소수 그룹 수업</strong><span>4명 이하로만 편성</span></div>
+      <div class="mini"><strong>자습실 상시 개방</strong><span>수업이 끝나도 남아서</span></div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="index.html#contact" class="btn btn-main" style="padding:16px 44px">무료 상담 신청하기</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 푸터 ============ -->
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="logo"><span class="logo-dot"></span>공부의 온도</div>
+      <div>아이에게 맞는 공부 방식을 찾아 주는 곳</div>
+    </div>
+    <div>
+      <div class="foot-links">
+        <a href="index.html#visit">방문과외</a>
+        <a href="index.html#online">화상과외</a>
+        <a href="centers.html">학습센터</a>
+        <a href="teachers.html">선생님 찾기</a>
+        <a href="status.html">수업 현황</a>
+      </div>      <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ 지도 팝업 ============ -->
+<div class="map-modal" id="map-modal" hidden>
+  <div class="map-modal-bg" data-close></div>
+  <div class="map-modal-box">
+    <button type="button" class="map-modal-close" data-close aria-label="닫기">✕</button>
+    <h3 id="map-modal-title"></h3>
+    <p id="map-modal-addr" class="map-modal-addr"></p>
+    <div class="map-modal-frame"><iframe id="map-modal-iframe" title="센터 위치 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    <a id="map-modal-kakao" class="btn btn-ghost" target="_blank" rel="noopener">카카오맵에서 길찾기 ↗</a>
+  </div>
+</div>
+
+<script src="centers-data.js?v=1"></script>
+<script>
+/* 모바일 메뉴 */
+var burger = document.getElementById('burger');
+var menu = document.getElementById('menu');
+burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
+menu.addEventListener('click', function(e){ if(e.target.tagName === 'A' && e.target.getAttribute('href')) menu.classList.remove('open'); });
+
+(function(){
+  var DATA     = window.CENTERS || [];
+  var gridEl   = document.getElementById('center-grid');
+  var regionsEl= document.getElementById('center-regions');
+  var searchEl = document.getElementById('center-search');
+  var countEl  = document.getElementById('center-count');
+  var emptyEl  = document.getElementById('center-empty');
+  var moreBtn  = document.getElementById('center-more');
+  if(!gridEl || !DATA.length) return;
+
+  var PAGE = 30;
+  var shown = PAGE;
+  var activeRegion = '전체';
+  var keyword = '';
+
+  document.getElementById('cTotal').textContent = DATA.length;
+
+  /* 지역별 개수 집계 + 정렬(개수 많은 순) */
+  var counts = {};
+  DATA.forEach(function(c){ counts[c.region] = (counts[c.region] || 0) + 1; });
+  var regions = Object.keys(counts).sort(function(a,b){ return counts[b] - counts[a]; });
+
+  function makeBtn(label, region, active){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'region-btn' + (active ? ' active' : '');
+    b.textContent = label;
+    b.setAttribute('data-region', region);
+    return b;
+  }
+  regionsEl.appendChild(makeBtn('전체 ' + DATA.length, '전체', true));
+  regions.forEach(function(r){ regionsEl.appendChild(makeBtn(r + ' ' + counts[r], r)); });
+
+  regionsEl.addEventListener('click', function(e){
+    var btn = e.target.closest('.region-btn');
+    if(!btn) return;
+    activeRegion = btn.getAttribute('data-region');
+    Array.prototype.forEach.call(regionsEl.children, function(c){ c.classList.toggle('active', c === btn); });
+    shown = PAGE;
+    render();
+  });
+
+  /* 학교 정식명칭↔약칭 통일 + 소문자화 (검색어·데이터 양쪽에 적용) */
+  function norm(s){
+    return String(s == null ? '' : s).toLowerCase()
+      .replace(/여자중학교/g, '여중').replace(/여자고등학교/g, '여고').replace(/여자초등학교/g, '여초')
+      .replace(/초등학교/g, '초').replace(/중학교/g, '중').replace(/고등학교/g, '고')
+      .replace(/\s+/g, ' ');
+  }
+
+  searchEl.addEventListener('input', function(){
+    keyword = this.value.trim();
+    shown = PAGE;
+    render();
+  });
+
+  function filtered(){
+    /* 공백으로 분리한 모든 토큰이 다 들어있는 센터만 (지역+학교, 동+학교 등 조합 검색 지원) */
+    var tokens = norm(keyword).split(' ').filter(Boolean);
+    return DATA.filter(function(c){
+      if(activeRegion !== '전체' && c.region !== activeRegion) return false;
+      if(!tokens.length) return true;
+      var hay = norm(c.name + ' ' + c.region + ' ' + c.addr + ' ' + (c.dong || '') + ' ' + c.elem + ' ' + c.mid + ' ' + c.high);
+      return tokens.every(function(t){ return hay.indexOf(t) >= 0; });
+    });
+  }
+
+  function schoolRow(label, val){
+    if(!val) return '';
+    return '<div class="cs-row"><b>' + label + '</b><span>' + val + '</span></div>';
+  }
+
+  function render(){
+    var list = filtered();
+    countEl.innerHTML = '가까운 센터 <b>' + list.length + '곳</b>';
+    var slice = list.slice(0, shown);
+    gridEl.innerHTML = slice.map(function(c){
+      var q = encodeURIComponent(c.name);
+      return '<article class="c-card">'
+        + '<div class="cc-head"><span class="cc-region">' + c.region + '</span><h3>' + c.name + '</h3></div>'
+        + '<p class="cc-addr"><span class="ic">📍</span>' + c.addr + '</p>'
+        + '<div class="cc-schools">' + schoolRow('초', c.elem) + schoolRow('중', c.mid) + schoolRow('고', c.high) + '</div>'
+        + '<div class="cc-actions">'
+          + '<button type="button" class="btn btn-ghost cc-map-btn" data-name="' + c.name + '" data-addr="' + c.addr + '">🗺️ 지도 보기</button>'
+          + '<a class="btn btn-center" href="index.html?c=' + q + '#contact">상담 신청</a>'
+        + '</div>'
+      + '</article>';
+    }).join('');
+    emptyEl.hidden = list.length !== 0;
+    moreBtn.hidden = list.length <= shown;
+  }
+
+  moreBtn.addEventListener('click', function(){ shown += PAGE; render(); });
+
+  /* 홈에서 넘어온 검색어(?q=) 자동 반영 */
+  var qm = /[?&]q=([^&]*)/.exec(location.search);
+  if(qm){
+    var qv = decodeURIComponent(qm[1].replace(/\+/g, ' '));
+    if(qv){ searchEl.value = qv; keyword = qv.trim(); }
+  }
+  render();
+
+  /* 지도 팝업 (사이트 내 임베드) */
+  var modal  = document.getElementById('map-modal');
+  var mFrame = document.getElementById('map-modal-iframe');
+  var mTitle = document.getElementById('map-modal-title');
+  var mAddr  = document.getElementById('map-modal-addr');
+  var mKakao = document.getElementById('map-modal-kakao');
+  function closeModal(){ modal.hidden = true; mFrame.src = ''; document.body.style.overflow = ''; }
+  function cleanAddr(a){
+    return a.replace(/\([^)]*\)/g, '')
+            .replace(/\s*(제\s*)?\d+\s*층.*$/, '')
+            .replace(/\s*\d{1,4}(\s*,\s*\d+)*\s*호.*$/, '')
+            .replace(/\s+/g, ' ').trim();
+  }
+  gridEl.addEventListener('click', function(e){
+    var btn = e.target.closest('.cc-map-btn');
+    if(!btn) return;
+    var name = btn.getAttribute('data-name'), addr = btn.getAttribute('data-addr');
+    var mapQ = encodeURIComponent(cleanAddr(addr));
+    var kakaoQ = encodeURIComponent(addr);
+    mFrame.src = 'https://maps.google.com/maps?q=' + mapQ + '&z=17&hl=ko&output=embed';
+    mTitle.textContent = name;
+    mAddr.textContent = addr;
+    mKakao.href = 'https://map.kakao.com/?q=' + kakaoQ;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  });
+  modal.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !modal.hidden) closeModal(); });
+})();
+</script>
+</body>
+</html>

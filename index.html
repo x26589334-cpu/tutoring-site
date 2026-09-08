@@ -46,7 +46,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=2">
+<link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -55,13 +55,17 @@
   <div class="wrap nav">
     <a href="#" class="logo"><span class="logo-dot"></span>공부의 온도</a>
     <nav class="nav-menu" id="menu">
-      <a href="#visit">방문과외</a>
-      <a href="#online">화상과외</a>
-      <a href="#center">학습센터</a>
+      <div class="nav-item">
+        <a class="nav-top">과외 <span class="caret">▼</span></a>
+        <div class="nav-sub">
+          <a href="#visit"><span class="dot visit"></span>방문과외</a>
+          <a href="#online"><span class="dot online"></span>화상과외</a>
+        </div>
+      </div>
+      <a href="centers.html">학습센터</a>
       <a href="teachers.html">선생님 찾기</a>
       <a href="status.html">수업 현황</a>
-    </nav>
-    <a href="#contact" class="btn btn-main nav-cta">무료 상담</a>
+    </nav>    <a href="#contact" class="btn btn-main nav-cta">무료 상담</a>
     <button class="burger" id="burger" aria-label="메뉴 열기">☰</button>
   </div>
 </header>
@@ -137,7 +141,7 @@
           <li>자습실 + 질문 선생님 상주</li>
           <li>집에서 집중이 안 되는 아이에게</li>
         </ul>
-        <a href="#center" class="way-more">자세히 보기</a>
+        <a href="centers.html" class="way-more">가까운 센터 찾기</a>
       </div>
 
     </div>
@@ -209,6 +213,7 @@
         <div class="mini"><strong>소수 그룹 수업</strong><span>4명 이하로만 편성</span></div>
         <div class="mini"><strong>월간 성취 점검</strong><span>학부모 면담 포함</span></div>
       </div>
+      <a href="centers.html" class="btn btn-main" style="margin-top:26px;display:inline-block">전국 205개 센터에서 가까운 곳 찾기</a>
     </div>
   </div>
 </section>
@@ -256,11 +261,10 @@
       <div class="foot-links">
         <a href="#visit">방문과외</a>
         <a href="#online">화상과외</a>
-        <a href="#center">학습센터</a>
+        <a href="centers.html">학습센터</a>
         <a href="teachers.html">선생님 찾기</a>
-      <a href="status.html">수업 현황</a>
-      </div>
-      <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
+        <a href="status.html">수업 현황</a>
+      </div>      <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
     </div>
   </div>
 </footer>
@@ -272,17 +276,22 @@ var menu = document.getElementById('menu');
 burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
 menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') menu.classList.remove('open'); });
 
-/* 선생님 상세 페이지에서 넘어온 경우 (?t=아이디&n=이름) — 어느 선생님을 보고 왔는지 함께 접수한다 */
+/* 선생님 상세(?t=아이디&n=이름) 또는 학습센터(?c=센터명) 에서 넘어온 경우
+   — 무엇을 보고 왔는지 폼 위에 알려 주고, 접수 데이터에도 함께 담는다 */
 var PICKED = (function(){
   var qp = new URLSearchParams(location.search);
-  var id = qp.get('t') || '', name = qp.get('n') || '';
+  var id = qp.get('t') || '', name = qp.get('n') || '', center = qp.get('c') || '';
+  var box = document.getElementById('pickedTeacher');
   if(id && name){
-    var box = document.getElementById('pickedTeacher');
     box.innerHTML = '<b>' + name + ' 선생님</b>을 보고 오셨네요. 이 선생님으로 상담을 접수해 드릴게요.'
                   + ' <a href="teachers.html">다른 선생님 보기</a>';
     box.hidden = false;
+  } else if(center){
+    box.innerHTML = '<b>' + center + '</b>을 보고 오셨네요. 이 센터로 상담을 접수해 드릴게요.'
+                  + ' <a href="centers.html">다른 센터 보기</a>';
+    box.hidden = false;
   }
-  return { id:id, name:name };
+  return { id:id, name:name, center:center };
 })();
 
 /* 상담 폼 → 구글 "웹 문의" 시트의 "공부의온도" 탭에 저장
@@ -301,7 +310,8 @@ document.getElementById('consultForm').addEventListener('submit', function(e){
     연락처: val('c_phone'),
     학년: val('c_grade'),
     희망방식: val('c_way'),
-    희망선생님: PICKED.name ? (PICKED.name + ' 선생님 (' + PICKED.id + ')') : ''
+    희망선생님: PICKED.name ? (PICKED.name + ' 선생님 (' + PICKED.id + ')') : '',
+    희망센터: PICKED.center
   };
   if(!payload.이름 || !payload.연락처 || !payload.학년 || !payload.희망방식){
     alert('필수 항목을 모두 입력해 주세요.'); return;
