@@ -15,6 +15,27 @@ $T = Load-JsArray "$HOME\gwaoe-page\teachers-data.js"
 if($W.Count -ne $T.Count){ throw "건수 불일치: $($W.Count) vs $($T.Count)" }
 
 
+# 사내 브랜드 표기 제거 — 공부의 온도에는 와와·에듀코 계열 이름이 나오면 안 된다.
+# (센터 쪽은 build_centers.ps1 이 따로 처리한다. 여기는 선생님 소개글·한줄소개용.)
+# 순서 중요: 구체적인 표현부터 걷어내야 문장이 자연스럽게 남는다.
+function Remove-Brand([string]$s){
+  if(-not $s){ return $s }
+  $s = $s -replace '와와학습코칭센터\s+\S+점에서', '학습센터에서'
+  $s = $s -replace '와와학습코칭센터\s+\S+점', '학습센터'
+  $s = $s -replace '와와학습코칭(센터|학원)?', '학습센터'
+  $s = $s -replace '와와\s*센터', '학습센터'
+  $s = $s -replace '모두오름|글로리드|더블유플러스|WAWA|wawa', '학습센터'
+  $s = $s -replace '와와', '학습센터'
+  $s = $s -replace '학습센터\s+센터', '학습센터'     # 위 치환으로 생기는 중복
+  # 방문교육 브랜드 — 어절째 걷어내되 조사는 살린다
+  $s = $s -replace '에듀코\s+\d+년을\s*비롯해\s*', ''
+  $s = $s -replace '에듀코\s+\d+급의\s*', ''
+  $s = $s -replace '에듀코\s+입사\s+(\d+년차)인', '$1인'
+  $s = $s -replace '에듀코\s+(\d+년차)', '$1'
+  $s = $s -replace '에듀코\s*', ''
+  return ($s -replace '  +', ' ').Trim()
+}
+
 function AsList($v){
   if($null -eq $v){ return @() }
   if($v -is [string]){ if($v){return @($v)} else {return @()} }
@@ -42,13 +63,13 @@ for($n=0;$n -lt $W.Count;$n++){
     gr = @($grs)
     sd = $ct.sd
     r  = $ct.r
-    tag= [string]$cw.tagline
+    tag= Remove-Brand ([string]$cw.tagline)
     k  = [int]$ct.k
   }
   $out.Add([pscustomobject]$o)
 
   # 검색 색인: 읍면동 + 학교 + 소개 + 시군구
-  $blob = (@($sgu + $emd + $sch) -join ' ') + ' ' + [string]$cw.intro + ' ' + [string]$cw.tagline
+  $blob = (@($sgu + $emd + $sch) -join ' ') + ' ' + (Remove-Brand ([string]$cw.intro)) + ' ' + (Remove-Brand ([string]$cw.tagline))
   $blob = ($blob -replace '\s+',' ').Trim().ToLower()
   $idx[$ct.i]=$blob
 }
@@ -57,7 +78,7 @@ for($n=0;$n -lt $W.Count;$n++){
 $detail=@{}
 for($n=0;$n -lt $W.Count;$n++){
   $detail[$T[$n].i]=[pscustomobject]@{
-    intro   = [string]$W[$n].intro
+    intro   = Remove-Brand ([string]$W[$n].intro)
     schools = @(AsList $W[$n].schools)
     emdong  = @(AsList $W[$n].emdong)
     sigungu = @(AsList $W[$n].sigungu)

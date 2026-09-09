@@ -38,7 +38,7 @@ foreach($c in $SRCLIST){
 $hdr = @"
 /* 공부의 온도 — 학습센터 목록 데이터 (자동 생성, 수정하지 말 것)
    name=센터명, region=시도, addr=주소, elem/mid/high=인근 초/중/고, dong=동
-   ※ 원본은 와와 센터 데이터. 브랜드 표기(와와·모두오름·글로리드·더블유플러스)는 제거하고 옮긴다. */
+   ※ 원본은 그룹 계열 센터 데이터. 계열 브랜드 표기는 모두 제거하고 옮긴다. */
 window.CENTERS=
 "@
 $body = ConvertTo-Json -InputObject $out.ToArray() -Depth 5 -Compress
