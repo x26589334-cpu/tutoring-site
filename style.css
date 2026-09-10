@@ -37,6 +37,9 @@ img{max-width:100%}
 .btn{
   display:inline-block;padding:15px 34px;border-radius:999px;font-size:15px;font-weight:500;
   border:none;cursor:pointer;transition:.25s ease;font-family:inherit;
+  /* <button> 은 브라우저 기본값이 가운데 정렬이라, a.btn 과 button.btn 을 섞어 쓰면
+     폭이 늘어났을 때(flex:1 / width:100%) 글자 위치가 어긋난다. 여기서 통일한다. */
+  text-align:center;line-height:1.35;
 }
 .btn-main{background:var(--visit);color:#fff;box-shadow:0 10px 24px rgba(242,169,140,.35)}
 .btn-main:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(242,169,140,.45)}

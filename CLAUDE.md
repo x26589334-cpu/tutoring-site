@@ -32,10 +32,10 @@ git push
 - `tools/` — 재생성 스크립트 (아래 참고)
 
 ## ⚠️ 중요 규칙
-- **`style.css` 를 수정하면 전 페이지의 `style.css?v=` 숫자를 올려야 반영된다.** (현재 **v5**)
+- **`style.css` 를 수정하면 전 페이지의 `style.css?v=` 숫자를 올려야 반영된다.** (현재 **v6**)
   안 올리면 배포는 돼도 브라우저가 옛 캐시를 써서 "바뀐 게 없다"는 현상이 난다.
   ```bash
-  V=5
+  V=6
   grep -rl 'style.css?v=' --include='*.html' . | while read f; do
     sed -i "s#style\.css?v=[0-9]*#style.css?v=$V#g" "$f"
   done
