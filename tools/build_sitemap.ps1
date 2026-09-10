@@ -13,6 +13,13 @@ Get-ChildItem "$SITE\t\*.html" | Sort-Object Name | ForEach-Object {
   [void]$sb.AppendLine("  <url><loc>https://firststudy.co.kr/t/$($_.Name)</loc><lastmod>$today</lastmod><priority>0.7</priority></url>")
   $n++
 }
+$cn = 0
+# 센터 페이지는 디스크에 한글 파일명으로 저장돼 있다. 사이트맵 URL 은 퍼센트 인코딩해야 한다.
+Get-ChildItem "$SITE\c\*.html" -ErrorAction SilentlyContinue | Sort-Object Name | ForEach-Object {
+  $enc = [Uri]::EscapeDataString($_.BaseName) + '.html'
+  [void]$sb.AppendLine("  <url><loc>https://firststudy.co.kr/c/$enc</loc><lastmod>$today</lastmod><priority>0.8</priority></url>")
+  $cn++
+}
 [void]$sb.AppendLine('</urlset>')
 [IO.File]::WriteAllText("$SITE\sitemap.xml", $sb.ToString(), (New-Object Text.UTF8Encoding $false))
-"sitemap.xml 갱신: 선생님 $n 개 + 주요 4개 = $($n+4) URL"
+"sitemap.xml 갱신: 선생님 $n + 센터 $cn + 주요 4개 = $($n+$cn+4) URL"

@@ -419,3 +419,49 @@ footer{background:#F5F0E8;padding:60px 0 46px}
     padding:4px 0 4px 14px;min-width:0;background:transparent}
   .nav-top .caret{display:none}
 }
+
+/* ============================================================
+   센터 개별 페이지 (c/*.html)
+   목적: 지역·학교명·과목명을 정적 HTML 로 노출한다.
+   ============================================================ */
+.cd-hero{padding:70px 0 34px}
+.cd-hero h1{font-size:clamp(25px,3.3vw,37px);line-height:1.36;margin:10px 0 14px}
+.cd-lead{color:var(--ink-light);font-size:16px;line-height:1.8}
+.cd-meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:20px;font-size:14px;color:var(--ink-light)}
+
+.cd-box{background:#fff;border:1px solid var(--line);border-radius:22px;padding:30px 32px;box-shadow:var(--shadow-sm)}
+.cd-box h2{font-size:20px;margin-bottom:10px}
+.cd-note{color:var(--ink-light);font-size:14.5px;line-height:1.8;margin-bottom:20px}
+.cd-schools{display:flex;flex-direction:column;gap:0}
+.cd-srow{display:flex;gap:16px;padding:14px 0;border-bottom:1px dashed var(--line);font-size:14.8px;line-height:1.9}
+.cd-srow:last-child{border-bottom:none}
+.cd-srow b{flex:0 0 62px;color:var(--ink-light);font-weight:500;font-size:13.5px;padding-top:2px}
+.cd-srow span{color:var(--ink)}
+
+.cd-subjects{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.cd-subj{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 26px}
+.cd-subj h3{font-size:17px;margin-bottom:10px}
+.cd-subj p{color:var(--ink-light);font-size:14.5px;line-height:1.85}
+
+.cd-ways{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.cd-way{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px 28px;position:relative;overflow:hidden}
+.cd-way::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px}
+.cd-way.w-visit::before{background:var(--visit)}
+.cd-way.w-online::before{background:var(--online)}
+.cd-way.w-center::before{background:var(--center)}
+.cd-way h3{font-size:17px;margin-bottom:10px}
+.cd-way p{color:var(--ink-light);font-size:14.3px;line-height:1.85;margin-bottom:14px}
+.cd-way a{font-size:14px;font-weight:700;color:var(--ink)}
+.cd-way a:hover{text-decoration:underline}
+
+.cd-near{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:8px}
+.cd-near a{padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;
+  font-size:14px;color:var(--ink-light);transition:.15s}
+.cd-near a:hover{border-color:var(--visit);color:var(--ink)}
+
+@media(max-width:900px){ .cd-ways{grid-template-columns:1fr} }
+@media(max-width:600px){
+  .cd-box{padding:24px 20px}
+  .cd-srow{flex-direction:column;gap:4px}
+  .cd-srow b{flex:none}
+}

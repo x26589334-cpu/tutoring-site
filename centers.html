@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
 
@@ -223,11 +223,13 @@ menu.addEventListener('click', function(e){ if(e.target.tagName === 'A' && e.tar
     gridEl.innerHTML = slice.map(function(c){
       var q = encodeURIComponent(c.name);
       return '<article class="c-card">'
-        + '<div class="cc-head"><span class="cc-region">' + c.region + '</span><h3>' + c.name + '</h3></div>'
+        + '<div class="cc-head"><span class="cc-region">' + c.region + '</span>'
+          + '<h3><a href="c/' + q + '.html">' + c.name + '</a></h3></div>'
         + '<p class="cc-addr"><span class="ic">📍</span>' + c.addr + '</p>'
         + '<div class="cc-schools">' + schoolRow('초', c.elem) + schoolRow('중', c.mid) + schoolRow('고', c.high) + '</div>'
         + '<div class="cc-actions">'
-          + '<button type="button" class="btn btn-ghost cc-map-btn" data-name="' + c.name + '" data-addr="' + c.addr + '">🗺️ 지도 보기</button>'
+          + '<a class="btn btn-ghost" href="c/' + q + '.html">자세히 보기</a>'
+          + '<button type="button" class="btn btn-ghost cc-map-btn" data-name="' + c.name + '" data-addr="' + c.addr + '">🗺️ 지도</button>'
           + '<a class="btn btn-center" href="index.html?c=' + q + '#contact">상담 신청</a>'
         + '</div>'
       + '</article>';
