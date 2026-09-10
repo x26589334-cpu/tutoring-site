@@ -7,6 +7,7 @@ $sb = New-Object Text.StringBuilder
 [void]$sb.AppendLine("  <url><loc>https://firststudy.co.kr/</loc><lastmod>$today</lastmod><priority>1.0</priority></url>")
 [void]$sb.AppendLine("  <url><loc>https://firststudy.co.kr/teachers.html</loc><lastmod>$today</lastmod><priority>0.9</priority></url>")
 [void]$sb.AppendLine("  <url><loc>https://firststudy.co.kr/centers.html</loc><lastmod>$today</lastmod><priority>0.9</priority></url>")
+[void]$sb.AppendLine("  <url><loc>https://firststudy.co.kr/grade-calculator.html</loc><lastmod>$today</lastmod><priority>0.9</priority></url>")
 [void]$sb.AppendLine("  <url><loc>https://firststudy.co.kr/status.html</loc><lastmod>$today</lastmod><priority>0.6</priority></url>")
 $n = 0
 Get-ChildItem "$SITE\t\*.html" | Sort-Object Name | ForEach-Object {
@@ -28,4 +29,4 @@ Get-ChildItem "$SITE\c\*.html" -ErrorAction SilentlyContinue | Sort-Object Name 
 }
 [void]$sb.AppendLine('</urlset>')
 [IO.File]::WriteAllText("$SITE\sitemap.xml", $sb.ToString(), (New-Object Text.UTF8Encoding $false))
-"sitemap.xml 갱신: 선생님 $n + 센터 $cn + 글 $bn + 주요 5개 = $($n+$cn+$bn+5) URL"
+"sitemap.xml 갱신: 선생님 $n + 센터 $cn + 글 $bn + 주요 6개 = $($n+$cn+$bn+6) URL"

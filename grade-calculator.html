@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>내신 등급 계산기 — 원점수·평균·표준편차로 석차등급 계산 | 공부의 온도</title>
+<meta name="description" content="성적표의 원점수, 과목평균, 표준편차만 넣으면 예상 내신 등급이 바로 나옵니다. 고등학교 5등급제와 9등급제, 중학교 성취도(A~E)를 모두 지원하고, 다음 등급까지 몇 점이 필요한지도 알려드립니다.">
+<link rel="canonical" href="https://firststudy.co.kr/grade-calculator.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="내신 등급 계산기 | 공부의 온도">
+<meta property="og:description" content="원점수·평균·표준편차만 넣으면 예상 내신 등급과 다음 등급까지 필요한 점수가 나옵니다.">
+<meta property="og:url" content="https://firststudy.co.kr/grade-calculator.html">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://firststudy.co.kr/apple-touch-icon.png">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#FDFBF7">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "내신 등급 계산기",
+  "url": "https://firststudy.co.kr/grade-calculator.html",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "웹 브라우저",
+  "inLanguage": "ko",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+  "publisher": { "@type": "EducationalOrganization", "name": "공부의 온도", "url": "https://firststudy.co.kr/" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "내신 등급은 어떻게 계산되나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "고등학교 내신은 같은 과목을 듣는 학생들 사이의 석차를 누적 백분율로 환산해 등급을 매깁니다. 성적표에 석차가 나오지 않는 경우, 원점수와 과목평균·표준편차로 Z점수를 구해 상위 몇 퍼센트인지 추정할 수 있습니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "5등급제와 9등급제는 무엇이 다른가요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "2025학년도 고등학교 1학년부터 내신이 9등급제에서 5등급제로 바뀌었습니다. 5등급제는 1등급 상위 10%, 2등급 34%, 3등급 66%, 4등급 90%까지입니다. 9등급제는 1등급이 상위 4%로 훨씬 좁습니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "중학교도 내신 등급이 있나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "중학교는 석차등급을 매기지 않고 성취평가제로 A부터 E까지 성취도를 부여합니다. 원점수 90점 이상이 A, 80점 이상 B, 70점 이상 C, 60점 이상 D, 60점 미만이 E입니다." }
+    },
+    {
+      "@type": "Question",
+      "name": "표준편차가 크면 등급에 어떤 영향이 있나요?",
+      "acceptedAnswer": { "@type": "Answer", "text": "표준편차가 크다는 것은 학생들 점수가 넓게 퍼져 있다는 뜻입니다. 같은 원점수라도 표준편차가 크면 평균과의 차이가 상대적으로 작게 평가되어 등급이 불리해질 수 있고, 표준편차가 작으면 평균보다 조금만 높아도 상위권으로 올라가기 쉽습니다." }
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=7">
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="logo"><span class="logo-dot"></span>공부의 온도</a>
+    <nav class="nav-menu" id="menu">
+      <div class="nav-item">
+        <a class="nav-top">과외 <span class="caret">▼</span></a>
+        <div class="nav-sub">
+          <a href="index.html#visit"><span class="dot visit"></span>방문과외</a>
+          <a href="index.html#online"><span class="dot online"></span>화상과외</a>
+        </div>
+      </div>
+      <a href="centers.html">학습센터</a>
+      <a href="teachers.html">선생님 찾기</a>
+      <a href="blog.html">공부 이야기</a>
+      <a href="status.html">수업 현황</a>
+    </nav>
+    <a href="index.html#contact" class="btn btn-main nav-cta">무료 상담</a>
+    <button class="burger" id="burger" aria-label="메뉴 열기">☰</button>
+  </div>
+</header>
+
+<section class="t-hero" style="padding-bottom:10px">
+  <div class="wrap">
+    <p class="eyebrow">무료 도구</p>
+    <h1>내신 등급 계산기</h1>
+    <p>성적표에 있는 <b>원점수 · 과목평균 · 표준편차</b>만 넣으면 됩니다.<br>예상 등급과 다음 등급까지 몇 점이 필요한지 함께 알려드립니다.</p>
+  </div>
+</section>
+
+<section style="padding-top:24px">
+  <div class="wrap wrap-narrow">
+
+    <div class="gc-box">
+      <div class="gc-modes" id="gcModes">
+        <button type="button" class="gc-mode on" data-mode="h5">고등학교 <b>5등급제</b></button>
+        <button type="button" class="gc-mode" data-mode="h9">고등학교 <b>9등급제</b></button>
+        <button type="button" class="gc-mode" data-mode="m">중학교 <b>성취도</b></button>
+      </div>
+      <p class="gc-hint" id="gcHint">2025학년도 고1부터 적용됩니다. 지금 고2·고1이면 이쪽입니다.</p>
+
+      <div class="gc-fields">
+        <label class="gc-f">
+          <span>원점수</span>
+          <input type="number" id="gcScore" inputmode="decimal" placeholder="87" min="0" max="100" step="0.01">
+          <i>점</i>
+        </label>
+        <label class="gc-f" data-hs>
+          <span>과목평균</span>
+          <input type="number" id="gcMean" inputmode="decimal" placeholder="72.4" min="0" max="100" step="0.01">
+          <i>점</i>
+        </label>
+        <label class="gc-f" data-hs>
+          <span>표준편차</span>
+          <input type="number" id="gcSd" inputmode="decimal" placeholder="14.2" min="0.01" step="0.01">
+          <i></i>
+        </label>
+        <label class="gc-f" data-hs>
+          <span>수강자 수</span>
+          <input type="number" id="gcN" inputmode="numeric" placeholder="248 (선택)" min="1" step="1">
+          <i>명</i>
+        </label>
+      </div>
+
+      <button type="button" class="btn btn-main gc-run" id="gcRun">등급 계산하기</button>
+
+      <div class="gc-result" id="gcResult" hidden>
+        <div class="gc-grade">
+          <span class="gc-label">예상 등급</span>
+          <strong id="gcGrade">3등급</strong>
+        </div>
+        <ul class="gc-rows" id="gcRows"></ul>
+        <p class="gc-next" id="gcNext"></p>
+      </div>
+
+      <p class="gc-warn">
+        ⓘ <b>추정치입니다.</b> 실제 등급은 반 학생들의 실제 석차로 정해집니다.
+        이 계산기는 점수가 정규분포를 이룬다고 가정하고 상위 몇 퍼센트인지 되짚는 방식이라,
+        동점자가 많거나 수강자가 적은 과목에서는 실제와 차이가 날 수 있습니다.
+      </p>
+    </div>
+
+    <div class="gc-info">
+      <h2>등급 기준표</h2>
+      <div class="gc-tables">
+        <div>
+          <h3>고등학교 5등급제 <small>2025학년도 고1~</small></h3>
+          <table class="gc-table">
+            <tr><th>1등급</th><td>상위 10%</td></tr>
+            <tr><th>2등급</th><td>~34%</td></tr>
+            <tr><th>3등급</th><td>~66%</td></tr>
+            <tr><th>4등급</th><td>~90%</td></tr>
+            <tr><th>5등급</th><td>~100%</td></tr>
+          </table>
+        </div>
+        <div>
+          <h3>고등학교 9등급제 <small>기존</small></h3>
+          <table class="gc-table">
+            <tr><th>1등급</th><td>상위 4%</td></tr>
+            <tr><th>2등급</th><td>~11%</td></tr>
+            <tr><th>3등급</th><td>~23%</td></tr>
+            <tr><th>4등급</th><td>~40%</td></tr>
+            <tr><th>5등급</th><td>~60%</td></tr>
+            <tr><th>6등급</th><td>~77%</td></tr>
+            <tr><th>7등급</th><td>~89%</td></tr>
+            <tr><th>8등급</th><td>~96%</td></tr>
+            <tr><th>9등급</th><td>~100%</td></tr>
+          </table>
+        </div>
+        <div>
+          <h3>중학교 성취도</h3>
+          <table class="gc-table">
+            <tr><th>A</th><td>원점수 90점~</td></tr>
+            <tr><th>B</th><td>80~89점</td></tr>
+            <tr><th>C</th><td>70~79점</td></tr>
+            <tr><th>D</th><td>60~69점</td></tr>
+            <tr><th>E</th><td>~59점</td></tr>
+          </table>
+          <p class="gc-note">중학교는 석차등급을 내지 않습니다. 원점수만으로 정해집니다.</p>
+        </div>
+      </div>
+
+      <h2>자주 묻는 질문</h2>
+      <div class="gc-faq">
+        <div><h3>표준편차가 크면 왜 불리한가요?</h3>
+          <p>표준편차가 크다는 건 학생들 점수가 넓게 퍼져 있다는 뜻입니다. 같은 원점수라도 평균과의 차이가 상대적으로 작게 평가되어 등급이 불리해질 수 있습니다. 반대로 표준편차가 작은 과목은 평균보다 조금만 높아도 상위권으로 올라가기 쉽습니다.</p></div>
+        <div><h3>성적표에 표준편차가 없어요.</h3>
+          <p>중학교 성적표에는 보통 표준편차가 나오지 않습니다. 중학교는 원점수만으로 성취도(A~E)가 정해지니 위에서 <b>중학교 성취도</b> 모드를 쓰시면 됩니다.</p></div>
+        <div><h3>등급을 올리려면 몇 점이 필요한가요?</h3>
+          <p>계산하면 결과 아래에 <b>다음 등급까지 필요한 원점수</b>가 함께 나옵니다. 다만 이것도 추정치라, 다음 시험에서 평균과 표준편차가 달라지면 필요한 점수도 달라집니다.</p></div>
+      </div>
+    </div>
+
+    <div class="bl-cta" style="margin-top:40px">
+      <h3>등급이 생각보다 낮게 나왔다면</h3>
+      <p>점수를 올리는 방법은 과목마다, 아이마다 다릅니다. 지난 시험지 한 장만 있으면 어디서 빠지고 있는지 짚어 드릴 수 있습니다.</p>
+      <p>방문과외·화상과외·학습센터 중 아이에게 맞는 방식부터 함께 고릅니다.</p>
+      <a href="index.html#contact" class="btn btn-main">무료 상담 신청하기</a>
+    </div>
+
+    <div class="bl-links">
+      <h3>이어서 보기</h3>
+      <a href="teachers.html">우리 지역 과외 선생님 찾기</a>
+      <a href="centers.html">가까운 학습센터 찾기</a>
+      <a href="blog.html">공부 이야기 전체 보기</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="logo"><span class="logo-dot"></span>공부의 온도</div>
+      <div>아이에게 맞는 공부 방식을 찾아 주는 곳</div>
+    </div>
+    <div>
+      <div class="foot-links">
+        <a href="index.html#visit">방문과외</a>
+        <a href="index.html#online">화상과외</a>
+        <a href="centers.html">학습센터</a>
+        <a href="teachers.html">선생님 찾기</a>
+        <a href="blog.html">공부 이야기</a>
+        <a href="grade-calculator.html">내신 등급 계산기</a>
+        <a href="status.html">수업 현황</a>
+      </div>
+      <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+var burger = document.getElementById('burger');
+var menu = document.getElementById('menu');
+burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
+menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') menu.classList.remove('open'); });
+
+(function(){
+  /* 표준정규분포 누적확률 Φ(z) — Abramowitz & Stegun 26.2.17 근사 */
+  function phi(z){
+    var t = 1 / (1 + 0.2316419 * Math.abs(z));
+    var d = 0.3989422804014327 * Math.exp(-z * z / 2);
+    var p = d * t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+    return z > 0 ? 1 - p : p;
+  }
+  /* 상위 p% 가 되는 z (이분법) — p 는 0~1 의 '상위 비율' */
+  function zForTop(p){
+    var lo = -6, hi = 6;
+    for(var i = 0; i < 80; i++){
+      var mid = (lo + hi) / 2;
+      if(1 - phi(mid) > p) lo = mid; else hi = mid;
+    }
+    return (lo + hi) / 2;
+  }
+
+  var CUTS = {
+    h5: [10, 34, 66, 90, 100],
+    h9: [4, 11, 23, 40, 60, 77, 89, 96, 100]
+  };
+  var HINTS = {
+    h5: '2025학년도 고1부터 적용됩니다. 지금 고2·고1이면 이쪽입니다.',
+    h9: '2024학년도 이전 고1 입학 기준입니다. 지금 고3이면 이쪽입니다.',
+    m:  '중학교는 석차등급이 없습니다. 원점수만 넣으면 성취도가 나옵니다.'
+  };
+
+  var mode = 'h5';
+  var modesEl = document.getElementById('gcModes');
+  var hintEl  = document.getElementById('gcHint');
+  var resEl   = document.getElementById('gcResult');
+  var hsFields = document.querySelectorAll('[data-hs]');
+
+  function applyMode(){
+    var isMid = (mode === 'm');
+    for(var i = 0; i < hsFields.length; i++){ hsFields[i].hidden = isMid; }
+    hintEl.textContent = HINTS[mode];
+    resEl.hidden = true;
+  }
+
+  modesEl.addEventListener('click', function(e){
+    var b = e.target.closest('[data-mode]'); if(!b) return;
+    mode = b.getAttribute('data-mode');
+    var list = modesEl.querySelectorAll('[data-mode]');
+    for(var i = 0; i < list.length; i++){ list[i].classList.toggle('on', list[i] === b); }
+    applyMode();
+  });
+
+  function num(id){
+    var v = document.getElementById(id).value;
+    if(v === '') return null;
+    var n = parseFloat(v);
+    return isNaN(n) ? null : n;
+  }
+
+  document.getElementById('gcRun').addEventListener('click', function(){
+    var score = num('gcScore');
+    if(score === null){ alert('원점수를 입력해 주세요.'); return; }
+
+    var rows = [];
+    var gradeTxt = '';
+    var nextTxt = '';
+
+    if(mode === 'm'){
+      var g = score >= 90 ? 'A' : score >= 80 ? 'B' : score >= 70 ? 'C' : score >= 60 ? 'D' : 'E';
+      gradeTxt = '성취도 ' + g;
+      rows.push(['원점수', score + '점']);
+      if(g !== 'A'){
+        var need = g === 'B' ? 90 : g === 'C' ? 80 : g === 'D' ? 70 : 60;
+        var up = g === 'B' ? 'A' : g === 'C' ? 'B' : g === 'D' ? 'C' : 'D';
+        nextTxt = up + ' 까지 <b>' + (Math.round((need - score) * 10) / 10) + '점</b> 남았습니다. (' + need + '점 이상)';
+      } else {
+        nextTxt = '가장 높은 성취도입니다.';
+      }
+    } else {
+      var mean = num('gcMean'), sd = num('gcSd'), n = num('gcN');
+      if(mean === null || sd === null){ alert('과목평균과 표준편차를 입력해 주세요.'); return; }
+      if(sd <= 0){ alert('표준편차는 0보다 커야 합니다.'); return; }
+
+      var z = (score - mean) / sd;
+      var top = (1 - phi(z)) * 100;               /* 상위 % */
+      var cuts = CUTS[mode];
+      var grade = cuts.length;
+      for(var i = 0; i < cuts.length; i++){
+        if(top <= cuts[i]){ grade = i + 1; break; }
+      }
+      gradeTxt = grade + '등급';
+
+      rows.push(['Z점수', (Math.round(z * 100) / 100).toFixed(2)]);
+      rows.push(['상위 추정', (Math.round(top * 10) / 10).toFixed(1) + '%']);
+      rows.push(['평균과의 차이', (score - mean > 0 ? '+' : '') + (Math.round((score - mean) * 10) / 10) + '점']);
+      if(n){
+        var rank = Math.max(1, Math.round(top / 100 * n));
+        rows.push(['예상 석차', '약 ' + rank + '등 / ' + n + '명']);
+      }
+
+      if(grade > 1){
+        var targetTop = cuts[grade - 2] / 100;     /* 한 등급 위 경계 */
+        var needScore = mean + zForTop(targetTop) * sd;
+        var diff = Math.max(0, needScore - score);
+        nextTxt = (grade - 1) + '등급까지 원점수 <b>약 ' + (Math.round(diff * 10) / 10) + '점</b>이 더 필요합니다. '
+                + '(약 ' + (Math.round(needScore * 10) / 10) + '점)';
+      } else {
+        nextTxt = '가장 높은 등급입니다.';
+      }
+    }
+
+    document.getElementById('gcGrade').textContent = gradeTxt;
+    document.getElementById('gcRows').innerHTML = rows.map(function(r){
+      return '<li><span>' + r[0] + '</span><b>' + r[1] + '</b></li>';
+    }).join('');
+    document.getElementById('gcNext').innerHTML = nextTxt;
+    resEl.hidden = false;
+    resEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+
+  applyMode();
+})();
+</script>
+</body>
+</html>

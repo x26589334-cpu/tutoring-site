@@ -34,6 +34,7 @@ foreach($f in (Get-ChildItem "$BLOG\*.html" -ErrorAction SilentlyContinue)){
     title   = $title
     desc    = $desc
     date    = (MetaOf $h 'article:published')
+    kind    = (MetaOf $h 'article:kind')
     area    = (MetaOf $h 'article:area')
     subject = (MetaOf $h 'article:subject')
     center  = (MetaOf $h 'article:center')
@@ -46,6 +47,7 @@ if(-not $posts.Count){ "blog/ 에 글이 없다. 중단."; return }
 $cards = foreach($p in $posts){
   $d = ([datetime]$p.date).ToString('yyyy.MM.dd')
   $tags = @()
+  if($p.kind){    $tags += $p.kind }
   if($p.area){    $tags += $p.area }
   if($p.subject){ $tags += $p.subject + '과외' }
   $tagHtml = ($tags | ForEach-Object { "<span>$(Esc $_)</span>" }) -join ''
@@ -67,11 +69,11 @@ $listHtml = @"
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>공부 이야기 | 공부의 온도 — 지역·학교별 과외 이야기</title>
-<meta name="description" content="동네와 학교에 맞춘 과외 이야기를 하루 한 편씩 씁니다. 우리 아이가 다니는 학교, 지금 막힌 과목에서 시작하세요.">
+<meta name="description" content="동네와 학교에 맞춘 과외 이야기, 상담에서 자주 나오는 질문을 매일 씁니다. 우리 아이가 다니는 학교, 지금 막힌 과목에서 시작하세요.">
 <link rel="canonical" href="https://firststudy.co.kr/blog.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="공부 이야기 | 공부의 온도">
-<meta property="og:description" content="동네와 학교에 맞춘 과외 이야기를 하루 한 편씩.">
+<meta property="og:description" content="동네와 학교 이야기, 자주 나오는 질문을 매일.">
 <meta property="og:url" content="https://firststudy.co.kr/blog.html">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://firststudy.co.kr/apple-touch-icon.png">
@@ -112,7 +114,7 @@ $listHtml = @"
   <div class="wrap">
     <p class="eyebrow">공부 이야기</p>
     <h1>우리 동네, 우리 학교<br><em>이야기부터</em></h1>
-    <p>같은 학년이어도 다니는 학교가 다르면 준비도 달라집니다.<br>동네와 학교에 맞춘 이야기를 하루 한 편씩 씁니다. 지금 <b>$($posts.Count)편</b>.</p>
+    <p>같은 학년이어도 다니는 학교가 다르면 준비도 달라집니다.<br>동네와 학교 이야기, 상담에서 자주 나오는 질문을 매일 씁니다. 지금 <b>$($posts.Count)편</b>.</p>
   </div>
 </section>
 
@@ -145,6 +147,7 @@ $($cards -join "`n")
         <a href="centers.html">학습센터</a>
         <a href="teachers.html">선생님 찾기</a>
         <a href="blog.html">공부 이야기</a>
+        <a href="grade-calculator.html">내신 등급 계산기</a>
         <a href="status.html">수업 현황</a>
       </div>
       <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
@@ -184,7 +187,7 @@ $rss = @"
   <channel>
     <title>공부의 온도 — 공부 이야기</title>
     <link>https://firststudy.co.kr/blog.html</link>
-    <description>동네와 학교에 맞춘 과외 이야기를 하루 한 편씩.</description>
+    <description>동네와 학교 이야기, 상담에서 자주 나오는 질문을 매일.</description>
     <language>ko</language>
     <lastBuildDate>$now</lastBuildDate>
 $($items -join "`n")

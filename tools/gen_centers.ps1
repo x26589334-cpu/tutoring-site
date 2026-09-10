@@ -315,6 +315,7 @@ $nearLinks    </div>
         <a href="../teachers.html">선생님 찾기</a>
         <a href="../blog.html">공부 이야기</a>
       <a href="../blog.html">공부 이야기</a>
+        <a href="../grade-calculator.html">내신 등급 계산기</a>
         <a href="../status.html">수업 현황</a>
       </div>
       <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
