@@ -211,6 +211,7 @@ $ldJson
       </div>
       <a href="../centers.html">학습센터</a>
       <a href="../teachers.html">선생님 찾기</a>
+      <a href="../blog.html">공부 이야기</a>
       <a href="../status.html">수업 현황</a>
     </nav>
     <a href="../index.html?c=$q#contact" class="btn btn-main nav-cta">무료 상담</a>
@@ -312,6 +313,8 @@ $nearLinks    </div>
         <a href="../index.html#online">화상과외</a>
         <a href="../centers.html">학습센터</a>
         <a href="../teachers.html">선생님 찾기</a>
+        <a href="../blog.html">공부 이야기</a>
+      <a href="../blog.html">공부 이야기</a>
         <a href="../status.html">수업 현황</a>
       </div>
       <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
