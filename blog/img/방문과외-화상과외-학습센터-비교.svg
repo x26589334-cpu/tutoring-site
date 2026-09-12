@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 664" width="900" height="664" role="img" aria-labelledby="t d" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+<title id="t">방문과외·화상과외·학습센터 한눈에 비교</title>
+<desc id="d">수업 장소, 이동 시간, 선생님 선택 범위, 옆에서 봐주는 정도, 어떤 아이에게 맞는지를 방문과외·화상과외·학습센터 세 가지 방식으로 비교한 표.</desc>
+
+<rect width="900" height="664" fill="#FDFBF7"/>
+
+<text x="26" y="44" font-size="26" font-weight="700" fill="#4A4441">방문과외 · 화상과외 · 학습센터 한눈에 비교</text>
+<text x="26" y="70" font-size="14.5" fill="#8C837D">우리 아이에게 맞는 공부 방식 고르기 · 공부의 온도</text>
+
+<!-- 헤더 -->
+<rect x="216" y="90" width="216" height="46" rx="10" fill="#F2A98C"/>
+<rect x="436" y="90" width="216" height="46" rx="10" fill="#93B8E8"/>
+<rect x="656" y="90" width="216" height="46" rx="10" fill="#8FCFB4"/>
+<text x="324" y="119" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">방문과외</text>
+<text x="544" y="119" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">화상과외</text>
+<text x="764" y="119" font-size="17" font-weight="700" fill="#FFFFFF" text-anchor="middle">학습센터</text>
+
+<!-- 1행 수업 장소 -->
+<rect x="216" y="146" width="216" height="86" rx="10" fill="#FDEDE5"/>
+<rect x="436" y="146" width="216" height="86" rx="10" fill="#E8F1FC"/>
+<rect x="656" y="146" width="216" height="86" rx="10" fill="#E6F5EE"/>
+<text x="30" y="196" font-size="15.5" font-weight="700" fill="#4A4441">수업 장소</text>
+<text x="324" y="184" font-size="14.5" fill="#4A4441" text-anchor="middle">우리 집</text>
+<text x="324" y="207" font-size="14.5" fill="#8C837D" text-anchor="middle">선생님이 방문</text>
+<text x="544" y="184" font-size="14.5" fill="#4A4441" text-anchor="middle">우리 집</text>
+<text x="544" y="207" font-size="14.5" fill="#8C837D" text-anchor="middle">화면으로 만남</text>
+<text x="764" y="184" font-size="14.5" fill="#4A4441" text-anchor="middle">가까운 학습센터</text>
+<text x="764" y="207" font-size="14.5" fill="#8C837D" text-anchor="middle">정해진 시간에 등원</text>
+
+<!-- 2행 이동 시간 -->
+<rect x="216" y="242" width="216" height="86" rx="10" fill="#FDEDE5"/>
+<rect x="436" y="242" width="216" height="86" rx="10" fill="#E8F1FC"/>
+<rect x="656" y="242" width="216" height="86" rx="10" fill="#E6F5EE"/>
+<text x="30" y="292" font-size="15.5" font-weight="700" fill="#4A4441">이동 시간</text>
+<text x="324" y="280" font-size="14.5" fill="#4A4441" text-anchor="middle">없음</text>
+<text x="324" y="303" font-size="14.5" fill="#8C837D" text-anchor="middle">늦은 시간대도 가능</text>
+<text x="544" y="280" font-size="14.5" fill="#4A4441" text-anchor="middle">없음</text>
+<text x="544" y="303" font-size="14.5" fill="#8C837D" text-anchor="middle">짧게 자주도 가능</text>
+<text x="764" y="280" font-size="14.5" fill="#4A4441" text-anchor="middle">센터까지 오가는 시간</text>
+<text x="764" y="303" font-size="14.5" fill="#8C837D" text-anchor="middle">동네 안에서 이동</text>
+
+<!-- 3행 선생님 선택 범위 -->
+<rect x="216" y="338" width="216" height="86" rx="10" fill="#FDEDE5"/>
+<rect x="436" y="338" width="216" height="86" rx="10" fill="#E8F1FC"/>
+<rect x="656" y="338" width="216" height="86" rx="10" fill="#E6F5EE"/>
+<text x="30" y="380" font-size="15.5" font-weight="700" fill="#4A4441">선생님</text>
+<text x="30" y="400" font-size="15.5" font-weight="700" fill="#4A4441">선택 범위</text>
+<text x="324" y="376" font-size="14.5" fill="#4A4441" text-anchor="middle">방문 가능한 지역의</text>
+<text x="324" y="399" font-size="14.5" fill="#4A4441" text-anchor="middle">선생님</text>
+<text x="544" y="376" font-size="14.5" fill="#4A4441" text-anchor="middle">전국 선생님 중에서</text>
+<text x="544" y="399" font-size="14.5" fill="#4A4441" text-anchor="middle">고름</text>
+<text x="764" y="376" font-size="14.5" fill="#4A4441" text-anchor="middle">센터에 있는</text>
+<text x="764" y="399" font-size="14.5" fill="#4A4441" text-anchor="middle">선생님</text>
+
+<!-- 4행 봐주는 방식 -->
+<rect x="216" y="434" width="216" height="86" rx="10" fill="#FDEDE5"/>
+<rect x="436" y="434" width="216" height="86" rx="10" fill="#E8F1FC"/>
+<rect x="656" y="434" width="216" height="86" rx="10" fill="#E6F5EE"/>
+<text x="30" y="476" font-size="15.5" font-weight="700" fill="#4A4441">봐주는</text>
+<text x="30" y="496" font-size="15.5" font-weight="700" fill="#4A4441">방식</text>
+<text x="324" y="472" font-size="14.5" fill="#4A4441" text-anchor="middle">1:1로 붙어서</text>
+<text x="324" y="495" font-size="14.5" fill="#4A4441" text-anchor="middle">푸는 과정을 봄</text>
+<text x="544" y="472" font-size="14.5" fill="#4A4441" text-anchor="middle">1:1로 화면을 나눠</text>
+<text x="544" y="495" font-size="14.5" fill="#4A4441" text-anchor="middle">풀이를 같이 봄</text>
+<text x="764" y="472" font-size="14.5" fill="#4A4441" text-anchor="middle">혼자 공부하다</text>
+<text x="764" y="495" font-size="14.5" fill="#4A4441" text-anchor="middle">막히면 질문</text>
+
+<!-- 5행 이런 아이에게 -->
+<rect x="216" y="530" width="216" height="86" rx="10" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="436" y="530" width="216" height="86" rx="10" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="656" y="530" width="216" height="86" rx="10" fill="#FFFFFF" stroke="#EDE5DA"/>
+<text x="30" y="580" font-size="15.5" font-weight="700" fill="#4A4441">이런 아이에게</text>
+<text x="324" y="568" font-size="14.5" fill="#4A4441" text-anchor="middle">혼자 두면</text>
+<text x="324" y="591" font-size="14.5" fill="#4A4441" text-anchor="middle">손을 놓는 아이</text>
+<text x="544" y="568" font-size="14.5" fill="#4A4441" text-anchor="middle">근처에 맞는 분이</text>
+<text x="544" y="591" font-size="14.5" fill="#4A4441" text-anchor="middle">없는 경우</text>
+<text x="764" y="568" font-size="14.5" fill="#4A4441" text-anchor="middle">집에서는 집중이</text>
+<text x="764" y="591" font-size="14.5" fill="#4A4441" text-anchor="middle">안 되는 아이</text>
+
+<text x="26" y="646" font-size="13" fill="#8C837D">세 방식은 섞어서도 씁니다. 어느 쪽이 맞을지는 상담에서 같이 정합니다. · firststudy.co.kr</text>
+</svg>
