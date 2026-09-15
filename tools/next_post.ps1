@@ -46,8 +46,13 @@ $rows = foreach($g in ($CEN | Group-Object name)){
   $sgg = ''
   $parts = ($rs[0].addr -split '\s+') | Where-Object { $_ }
   if($parts.Count -ge 2 -and $parts[1] -match '(시|군|구)$'){ $sgg = $parts[1] }
+  # 동 필드에 도시명이 겹쳐 들어간 경우 정리 — "경산시" + "경산 사동" → "경산 사동" 이 아니라 "사동"
+  $dong = [string]$rs[0].dong
+  # "광주 월계동", "대전 태평동" 처럼 앞에 도시명이 붙은 경우: 첫 어절이 동·읍·면·리·가로 안 끝나면 떼어낸다
+  $tok = @($dong -split '\s+' | Where-Object { $_ })
+  if($tok.Count -ge 2 -and $tok[0] -notmatch '(동|읍|면|리|가)$'){ $dong = ($tok[1..($tok.Count-1)] -join ' ') }
   [pscustomobject]@{
-    center=$g.Name; region=$rs[0].region; dong=$rs[0].dong; sgg=$sgg
+    center=$g.Name; region=$rs[0].region; dong=$dong; sgg=$sgg
     ele=$e; mid=$mi; hig=$hi; total=($e.Count+$mi.Count+$hi.Count); used=[int]$usedArea[$g.Name]
   }
 }
@@ -104,13 +109,55 @@ $trackB = if($Day -eq '수' -or $Day -eq '토'){ '인포그래픽' } else { '질
 "==============================================="
 
 # ---------- 1편 ----------
-$cand = $rows | Sort-Object @{e='used'}, @{e='total'; Descending=$true}
+# (2026-09-15) 두 가지를 바꿨다.
+#  1) 과목 로테이션 — 예전엔 '안 쓴 동네의 첫 빈 과목'을 골라서 새 동네마다 항상 수학이 나왔다
+#     (9/10~9/15 지역 글 5편이 전부 수학). 이제는 지금까지 가장 적게 쓴 과목부터 고른다.
+#  2) 지방 우선 — 서울·경기·인천은 뒤로 미룬다. 지방 70개 동네 x 5과목 = 350편(약 1년치).
+#     지방 조합이 다 떨어졌을 때만 수도권으로 넘어간다.
+$METRO = @('서울','경기','인천')
+$regionOf = @{}
+foreach($r in $rows){ $regionOf[$r.center] = $r.region }
+
+$subjCount = @{}; foreach($s in $SUBJECTS){ $subjCount[$s] = 0 }
+$regionUsed = @{}
+foreach($k in $usedCombo.Keys){
+  $cn,$sj0 = $k -split '\|',2
+  if($subjCount.ContainsKey($sj0)){ $subjCount[$sj0]++ }
+  $rg = $regionOf[$cn]; if($rg){ $regionUsed[$rg] = 1 + $regionUsed[$rg] }
+}
+# 적게 쓴 과목 순 (같으면 수학·영어·국어·과학·사회 순)
+$subjOrder = $SUBJECTS | Sort-Object @{e={ $subjCount[$_] }}, @{e={ [array]::IndexOf($SUBJECTS, $_) }}
+
+$pick = $null; $pickSj = $null; $fallback = $false
+foreach($pass in @('지방','수도권')){
+  foreach($sj in $subjOrder){
+    $pool = @($rows | Where-Object {
+      -not $usedCombo.ContainsKey("$($_.center)|$sj") -and
+      ( ($pass -eq '지방') -xor ($METRO -contains $_.region) )
+    })
+    if(-not $pool.Count){ continue }
+    # 한 도시에 몰리지 않게: 덜 쓴 동네 → 덜 쓴 시도 → 학교 많은 동네
+    $pick = $pool | Sort-Object @{e='used'}, @{e={ [int]$regionUsed[$_.region] }}, @{e='total'; Descending=$true} | Select-Object -First 1
+    $pickSj = $sj
+    if($pass -eq '수도권'){ $fallback = $true }
+    break
+  }
+  if($pick){ break }
+}
+
 $done = $false
-foreach($r in $cand){
-  if($done){ break }
-  foreach($sj in $SUBJECTS){
-    if($usedCombo.ContainsKey("$($r.center)|$sj")){ continue }
-    $area = (@($r.sgg, $r.dong) | Where-Object { $_ }) -join ' '
+foreach($r in @($pick)){
+  if($done -or -not $r){ break }
+  foreach($sj in @($pickSj)){
+    # 광역시·특별자치시는 구 이름만으론 어느 도시인지 모호하다(북구·동구는 여러 도시에 있다) → 도시명을 앞에 붙인다
+    #   울산 북구 송정동 / 대구 달서구 월성동 / 세종 새롬동      도(道) 지역은 그대로: 경산시 사동
+    $cityFirst = @('서울','부산','대구','인천','광주','대전','울산','세종')
+    if($cityFirst -contains $r.region -and ($r.sgg -match '구$' -or -not $r.sgg)){
+      $area = (@($r.region, $r.sgg, $r.dong) | Where-Object { $_ }) -join ' '
+    } else {
+      $area = (@($r.sgg, $r.dong) | Where-Object { $_ }) -join ' '
+    }
+    if($fallback){ "   ※ 지방 조합이 모두 소진되어 수도권 동네를 제안합니다." }
     ""
     "[1] 지역 + 과목 --------------------------------"
     "   article:kind     지역"
@@ -162,7 +209,10 @@ $written = @(Get-ChildItem "$BLOG\*.html" -ErrorAction SilentlyContinue).Count
 ""
 "-----------------------------------------------"
 "쓴 글 $written 편"
-"  지역x과목 남은 조합 $((($rows.Count * $SUBJECTS.Count) - $usedCombo.Count))개"
+$localRows = @($rows | Where-Object { $METRO -notcontains $_.region })
+$localUsed = @($usedCombo.Keys | Where-Object { $METRO -notcontains $regionOf[($_ -split '\|')[0]] }).Count
+"  지방 x 과목 남은 조합 $(($localRows.Count * $SUBJECTS.Count) - $localUsed)개 (지방 $($localRows.Count)개 동네)"
+"  과목별 지역 글 수   " + (($SUBJECTS | ForEach-Object { "$_ $($subjCount[$_])" }) -join ' / ')
 "  질문 은행 $($QUESTIONS.Count)개 / 인포그래픽 은행 $($INFOGRAPHICS.Count)개"
 ""
 "올린 뒤:  .\tools\build_blog.ps1  ->  .\tools\build_sitemap.ps1  ->  commit/push"
