@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" width="900" height="700" role="img" aria-labelledby="t d" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+<title id="t">중간고사 4주 전부터 주차별 공부 계획</title>
+<desc id="d">중간고사 4주 전, 3주 전, 2주 전, 1주 전에 각각 무엇을 해야 하는지 주차별로 정리한 중간고사 공부계획 그림. 범위 확인, 1회독, 표시한 곳 다시 풀기, 시간 재고 풀기 순서.</desc>
+
+<rect width="900" height="700" fill="#FDFBF7"/>
+
+<text x="26" y="44" font-size="26" font-weight="700" fill="#4A4441">중간고사 4주 전부터 · 주차별 할 일</text>
+<text x="26" y="70" font-size="14.5" fill="#8C837D">무엇을 얼마나가 아니라, 무엇을 먼저 · 중학생 · 고등학생 공통</text>
+
+<!-- 1) 4주 전 -->
+<rect x="26" y="92" width="848" height="128" rx="14" fill="#FDEDE5"/>
+<rect x="26" y="92" width="7" height="128" rx="3.5" fill="#F2A98C"/>
+<text x="56" y="126" font-size="19" font-weight="700" fill="#4A4441">4주 전</text>
+<text x="56" y="150" font-size="13.5" fill="#8C837D">D-28 ~ D-22</text>
+<text x="56" y="178" font-size="15.5" font-weight="700" fill="#C97B55">범위부터 확인합니다</text>
+<text x="300" y="126" font-size="15" fill="#4A4441">· 시험 범위와 수행평가 일정을 한 장에 적습니다</text>
+<text x="300" y="156" font-size="15" fill="#4A4441">· 교과서 · 프린트 · 노트에서 빠진 것을 먼저 채웁니다</text>
+<text x="300" y="186" font-size="15" fill="#4A4441">· 지난 시험에서 틀린 유형을 훑어 둡니다</text>
+
+<!-- 2) 3주 전 -->
+<rect x="26" y="236" width="848" height="128" rx="14" fill="#E8F1FC"/>
+<rect x="26" y="236" width="7" height="128" rx="3.5" fill="#93B8E8"/>
+<text x="56" y="270" font-size="19" font-weight="700" fill="#4A4441">3주 전</text>
+<text x="56" y="294" font-size="13.5" fill="#8C837D">D-21 ~ D-15</text>
+<text x="56" y="322" font-size="15.5" font-weight="700" fill="#4C7BBE">한 번 끝까지 훑습니다</text>
+<text x="300" y="270" font-size="15" fill="#4A4441">· 과목별로 교과서와 기본 문제집을 1회독 합니다</text>
+<text x="300" y="300" font-size="15" fill="#4A4441">· 막히는 곳은 표시만 하고 멈추지 않고 넘어갑니다</text>
+<text x="300" y="330" font-size="15" fill="#4A4441">· 암기 과목은 이때 첫 정리를 끝냅니다</text>
+
+<!-- 3) 2주 전 -->
+<rect x="26" y="380" width="848" height="128" rx="14" fill="#E6F5EE"/>
+<rect x="26" y="380" width="7" height="128" rx="3.5" fill="#8FCFB4"/>
+<text x="56" y="414" font-size="19" font-weight="700" fill="#4A4441">2주 전</text>
+<text x="56" y="438" font-size="13.5" fill="#8C837D">D-14 ~ D-8</text>
+<text x="56" y="466" font-size="15.5" font-weight="700" fill="#3E8E6B">표시한 곳만 다시</text>
+<text x="300" y="414" font-size="15" fill="#4A4441">· 1회독에서 표시해 둔 문제만 골라 다시 풉니다</text>
+<text x="300" y="444" font-size="15" fill="#4A4441">· 수업 시간에 강조된 부분을 필기에서 찾아 확인합니다</text>
+<text x="300" y="474" font-size="15" fill="#4A4441">· 서술형은 답이 아니라 과정까지 종이에 써 봅니다</text>
+
+<!-- 4) 1주 전 -->
+<rect x="26" y="524" width="848" height="128" rx="14" fill="#F3EFE7"/>
+<rect x="26" y="524" width="7" height="128" rx="3.5" fill="#8C837D"/>
+<text x="56" y="558" font-size="19" font-weight="700" fill="#4A4441">1주 전</text>
+<text x="56" y="582" font-size="13.5" fill="#8C837D">D-7 ~ D-1</text>
+<text x="56" y="610" font-size="15.5" font-weight="700" fill="#6B625C">시험지처럼 풉니다</text>
+<text x="300" y="558" font-size="15" fill="#4A4441">· 시간을 재고 한 과목씩 한 세트를 끝까지 풉니다</text>
+<text x="300" y="588" font-size="15" fill="#4A4441">· 틀린 것만 모은 종이 한 장을 과목마다 만듭니다</text>
+<text x="300" y="618" font-size="15" fill="#4A4441">· 전날은 새 문제 대신 그 종이만 봅니다</text>
+
+<text x="26" y="678" font-size="13.5" fill="#8C837D">학교마다 시험 일정과 범위가 다릅니다. 날짜는 기준일 뿐이니 주차별 순서를 보세요. · 공부의 온도 firststudy.co.kr</text>
+</svg>
