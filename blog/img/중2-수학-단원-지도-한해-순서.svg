@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 800" width="900" height="800" role="img" aria-labelledby="t d" font-family="'Noto Sans KR','Malgun Gothic','Apple SD Gothic Neo',sans-serif">
+<title id="t">중2 수학 한 해 단원 지도 — 1학기 2학기 배우는 순서</title>
+<desc id="d">중학교 2학년 수학을 1학기와 2학기로 나눠 배우는 순서대로 정리한 중2 수학 단원 지도. 1학기는 유리수와 순환소수, 식의 계산, 일차부등식, 연립일차방정식, 일차함수와 그래프. 2학기는 삼각형의 성질, 사각형의 성질, 도형의 닮음, 피타고라스 정리, 경우의 수와 확률. 고등학교에서 다시 만나는 단원을 함께 표시했습니다.</desc>
+
+<rect width="900" height="800" fill="#FDFBF7"/>
+
+<text x="26" y="44" font-size="26" font-weight="700" fill="#4A4441">중2 수학 한 해 단원 지도</text>
+<text x="26" y="70" font-size="14.5" fill="#8C837D">1년에 열 단원 · 민트 표시는 고등학교에서 다시 만나는 단원입니다</text>
+
+<!-- 학기 머리 -->
+<rect x="26" y="92" width="418" height="42" rx="12" fill="#FDEDE5"/>
+<text x="46" y="120" font-size="17" font-weight="700" fill="#C97B55">1학기 · 수와 식, 그리고 함수</text>
+<rect x="456" y="92" width="418" height="42" rx="12" fill="#E8F1FC"/>
+<text x="476" y="120" font-size="17" font-weight="700" fill="#4C7BBE">2학기 · 도형, 그리고 확률</text>
+
+<!-- ===== 1학기 ===== -->
+<g>
+<rect x="26" y="148" width="418" height="108" rx="14" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="26" y="148" width="6" height="108" rx="3" fill="#F2A98C"/>
+<circle cx="66" cy="182" r="16" fill="#FDEDE5"/>
+<text x="66" y="188" font-size="15" font-weight="700" fill="#C97B55" text-anchor="middle">1</text>
+<text x="94" y="188" font-size="17" font-weight="700" fill="#4A4441">유리수와 순환소수</text>
+<text x="94" y="214" font-size="13.5" fill="#8C837D">분수와 소수를 오가는 규칙을 배웁니다</text>
+<text x="94" y="236" font-size="13.5" fill="#8C837D">중1 정수·유리수가 바로 이어지는 자리</text>
+</g>
+
+<g>
+<rect x="26" y="268" width="418" height="108" rx="14" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="26" y="268" width="6" height="108" rx="3" fill="#F2A98C"/>
+<circle cx="66" cy="302" r="16" fill="#FDEDE5"/>
+<text x="66" y="308" font-size="15" font-weight="700" fill="#C97B55" text-anchor="middle">2</text>
+<text x="94" y="308" font-size="17" font-weight="700" fill="#4A4441">식의 계산</text>
+<text x="94" y="334" font-size="13.5" fill="#8C837D">지수법칙과 다항식의 덧셈·뺄셈·곱셈</text>
+<text x="94" y="356" font-size="13.5" font-weight="700" fill="#3E8E6B">고등 수학 계산의 바탕이 되는 단원</text>
+</g>
+
+<g>
+<rect x="26" y="388" width="418" height="108" rx="14" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="26" y="388" width="6" height="108" rx="3" fill="#F2A98C"/>
+<circle cx="66" cy="422" r="16" fill="#FDEDE5"/>
+<text x="66" y="428" font-size="15" font-weight="700" fill="#C97B55" text-anchor="middle">3</text>
+<text x="94" y="428" font-size="17" font-weight="700" fill="#4A4441">일차부등식</text>
+<text x="94" y="454" font-size="13.5" fill="#8C837D">등호 대신 부등호로 범위를 구합니다</text>
+<text x="94" y="476" font-size="13.5" fill="#8C837D">양변에 음수를 곱할 때 부호가 뒤집힙니다</text>
+</g>
+
+<g>
+<rect x="26" y="508" width="418" height="108" rx="14" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="26" y="508" width="6" height="108" rx="3" fill="#F2A98C"/>
+<circle cx="66" cy="542" r="16" fill="#FDEDE5"/>
+<text x="66" y="548" font-size="15" font-weight="700" fill="#C97B55" text-anchor="middle">4</text>
+<text x="94" y="548" font-size="17" font-weight="700" fill="#4A4441">연립일차방정식</text>
+<text x="94" y="574" font-size="13.5" fill="#8C837D">식 두 개를 한꺼번에 푸는 법을 배웁니다</text>
+<text x="94" y="596" font-size="13.5" font-weight="700" fill="#3E8E6B">고1 도형·방정식에서 그대로 다시 씁니다</text>
+</g>
+
+<g>
+<rect x="26" y="628" width="418" height="108" rx="14" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="26" y="628" width="6" height="108" rx="3" fill="#F2A98C"/>
+<circle cx="66" cy="662" r="16" fill="#FDEDE5"/>
+<text x="66" y="668" font-size="15" font-weight="700" fill="#C97B55" text-anchor="middle">5</text>
+<text x="94" y="668" font-size="17" font-weight="700" fill="#4A4441">일차함수와 그래프</text>
+<text x="94" y="694" font-size="13.5" fill="#8C837D">기울기·절편, 그래프와 방정식의 관계</text>
+<text x="94" y="716" font-size="13.5" font-weight="700" fill="#3E8E6B">고1 이차함수로 곧장 이어지는 단원</text>
+</g>
+
+<!-- ===== 2학기 ===== -->
+<g>
+<rect x="456" y="148" width="418" height="108" rx="14" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="456" y="148" width="6" height="108" rx="3" fill="#93B8E8"/>
+<circle cx="496" cy="182" r="16" fill="#E8F1FC"/>
+<text x="496" y="188" font-size="15" font-weight="700" fill="#4C7BBE" text-anchor="middle">6</text>
+<text x="524" y="188" font-size="17" font-weight="700" fill="#4A4441">삼각형의 성질</text>
+<text x="524" y="214" font-size="13.5" fill="#8C837D">이등변삼각형, 외심과 내심</text>
+<text x="524" y="236" font-size="13.5" fill="#8C837D">증명을 처음 제대로 쓰게 되는 자리</text>
+</g>
+
+<g>
+<rect x="456" y="268" width="418" height="108" rx="14" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="456" y="268" width="6" height="108" rx="3" fill="#93B8E8"/>
+<circle cx="496" cy="302" r="16" fill="#E8F1FC"/>
+<text x="496" y="308" font-size="15" font-weight="700" fill="#4C7BBE" text-anchor="middle">7</text>
+<text x="524" y="308" font-size="17" font-weight="700" fill="#4A4441">사각형의 성질</text>
+<text x="524" y="334" font-size="13.5" fill="#8C837D">평행사변형과 여러 가지 사각형</text>
+<text x="524" y="356" font-size="13.5" fill="#8C837D">조건을 외우지 말고 그림으로 이어 보기</text>
+</g>
+
+<g>
+<rect x="456" y="388" width="418" height="108" rx="14" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="456" y="388" width="6" height="108" rx="3" fill="#93B8E8"/>
+<circle cx="496" cy="422" r="16" fill="#E8F1FC"/>
+<text x="496" y="428" font-size="15" font-weight="700" fill="#4C7BBE" text-anchor="middle">8</text>
+<text x="524" y="428" font-size="17" font-weight="700" fill="#4A4441">도형의 닮음</text>
+<text x="524" y="454" font-size="13.5" fill="#8C837D">닮음 조건, 평행선과 선분의 길이의 비</text>
+<text x="524" y="476" font-size="13.5" font-weight="700" fill="#3E8E6B">중3 삼각비로 바로 이어집니다</text>
+</g>
+
+<g>
+<rect x="456" y="508" width="418" height="108" rx="14" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="456" y="508" width="6" height="108" rx="3" fill="#93B8E8"/>
+<circle cx="496" cy="542" r="16" fill="#E8F1FC"/>
+<text x="496" y="548" font-size="15" font-weight="700" fill="#4C7BBE" text-anchor="middle">9</text>
+<text x="524" y="548" font-size="17" font-weight="700" fill="#4A4441">피타고라스 정리</text>
+<text x="524" y="574" font-size="13.5" fill="#8C837D">직각삼각형 세 변 사이의 관계</text>
+<text x="524" y="596" font-size="13.5" font-weight="700" fill="#3E8E6B">고1 도형·좌표에서 계속 쓰입니다</text>
+</g>
+
+<g>
+<rect x="456" y="628" width="418" height="108" rx="14" fill="#FFFFFF" stroke="#EDE5DA"/>
+<rect x="456" y="628" width="6" height="108" rx="3" fill="#93B8E8"/>
+<circle cx="496" cy="662" r="16" fill="#E8F1FC"/>
+<text x="496" y="668" font-size="15" font-weight="700" fill="#4C7BBE" text-anchor="middle">10</text>
+<text x="524" y="668" font-size="17" font-weight="700" fill="#4A4441">경우의 수와 확률</text>
+<text x="524" y="694" font-size="13.5" fill="#8C837D">빠짐없이 세는 법에서 확률로</text>
+<text x="524" y="716" font-size="13.5" font-weight="700" fill="#3E8E6B">고등 확률과 통계의 출발점</text>
+</g>
+
+<text x="26" y="770" font-size="13.5" fill="#8C837D">교과서 출판사와 학교 진도에 따라 순서가 다를 수 있습니다. 학기 초에 교과서 목차로 한 번 확인해 보세요.</text>
+<text x="26" y="790" font-size="13.5" fill="#8C837D">공부의 온도 · firststudy.co.kr</text>
+</svg>
