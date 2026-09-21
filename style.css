@@ -74,7 +74,7 @@ header{
 @media(max-width:860px){
   .nav-menu{position:absolute;top:78px;left:0;right:0;background:var(--bg);flex-direction:column;gap:0;
     padding:0 6%;max-height:0;overflow:hidden;transition:.3s;border-bottom:1px solid var(--line)}
-  .nav-menu.open{max-height:320px;padding:14px 6% 22px}
+  .nav-menu.open{max-height:560px;padding:14px 6% 22px}  /* 메뉴 6개 + 과외 하위 2개가 다 보이도록 (2026-09-21 학교별 과외 추가) */
   .nav-menu a{padding:12px 0;border-bottom:1px solid var(--line)}
   .burger{display:block}
   .nav-cta{display:none}
@@ -595,4 +595,44 @@ footer{background:#F5F0E8;padding:60px 0 46px}
   .gc-box{padding:24px 20px}
   .gc-fields{grid-template-columns:1fr}
   .gc-grade strong{font-size:32px}
+}
+
+/* ============================================================
+   인천과외 (2026-09-21) — 홈 구·군 바로가기 · 학교별 과외(schools.html · school/*.html)
+   ============================================================ */
+.hero-search{max-width:560px;margin:0 auto 30px}
+.gu-sec{padding:80px 0}
+.gu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:34px}
+.gu-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;
+  display:flex;flex-direction:column;gap:4px;transition:.2s}
+.gu-card b{font-family:'Gowun Dodum',sans-serif;font-size:18px;color:var(--ink)}
+.gu-card span{font-size:12.5px;color:var(--ink-light)}
+.gu-card:hover{border-color:var(--visit);transform:translateY(-3px);box-shadow:var(--shadow-sm)}
+
+.sc-crumb{font-size:13px;color:var(--ink-light);margin-bottom:16px}
+.sc-crumb a:hover{color:var(--ink);text-decoration:underline}
+.sc-kw{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.sc-kw span{font-size:12px;padding:5px 11px;border-radius:999px;background:#fff;
+  border:1px solid var(--line);color:var(--ink-light)}
+.sc-table-wrap{overflow-x:auto}
+.sc-table{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px;min-width:420px}
+.sc-table th,.sc-table td{padding:11px 14px;border-bottom:1px solid var(--line);text-align:left}
+.sc-table tr:first-child th{background:var(--bg-soft);font-weight:700;color:var(--ink)}
+.sc-table th{color:var(--ink-light);font-weight:500;width:26%}
+.sc-table td:last-child{color:var(--ink);font-weight:500}
+
+.sc-gu{background:#fff;border:1px solid var(--line);border-radius:22px;padding:26px 28px;margin-top:18px;
+  scroll-margin-top:96px}
+.sc-gu h2{font-size:19px;margin-bottom:12px}
+.sc-row{display:flex;gap:16px;padding:12px 0;border-top:1px dashed var(--line)}
+.sc-row>b{flex:0 0 92px;font-size:13px;color:var(--ink-light);font-weight:500;padding-top:3px}
+.sc-links{display:flex;flex-wrap:wrap;gap:6px 14px}
+.sc-links a{font-size:14.3px;color:var(--ink)}
+.sc-links a:hover{color:#B96A48;text-decoration:underline}
+a.t-chip{display:inline-block}
+
+@media(max-width:600px){
+  .sc-gu{padding:20px 18px}
+  .sc-row{flex-direction:column;gap:6px}
+  .sc-row>b{flex:none}
 }

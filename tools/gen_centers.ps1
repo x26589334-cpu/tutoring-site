@@ -32,8 +32,25 @@ function Sigungu($addr){
   return ''
 }
 # 학교명 뒤에 정식 명칭 붙이기 — "덕풍중" → "덕풍중학교"
+# 인천 학교 정식 명칭 대조표 (school/*.html 파일명 = 정식 명칭)
+#   센터 데이터는 '굴포초'·'부원여중' 같은 약칭이라, 약칭 → 정식 명칭으로 바꿔 쓴다.
+#   인천 초등학교는 정식 이름 앞에 '인천'이 붙는 경우가 많다(굴포초 → 인천굴포초등학교).
+function ShortOf($n){
+  $n = $n -replace '초등학교$','초' -replace '여자중학교$','여중' -replace '중학교$','중' -replace '여자고등학교$','여고' -replace '고등학교$','고'
+  return $n
+}
+$SCHOOL_MAP = @{}
+foreach($f in (Get-ChildItem "$SITE\school\*.html" -ErrorAction SilentlyContinue)){
+  $full = $f.BaseName; $sh = ShortOf $full
+  if(-not $SCHOOL_MAP.ContainsKey($sh)){ $SCHOOL_MAP[$sh] = $full }
+  if($sh -like '인천*'){ $k2 = $sh.Substring(2); if($k2.Length -ge 2 -and -not $SCHOOL_MAP.ContainsKey($k2)){ $SCHOOL_MAP[$k2] = $full } }
+}
 function FullSchool($n, $kind){
+  $sh = ShortOf $n
+  if($SCHOOL_MAP.ContainsKey($sh)){ return $SCHOOL_MAP[$sh] }
   if($n -match '(초등학교|중학교|고등학교)$'){ return $n }
+  if($n -match '여중$'){ return ($n -replace '여중$','여자중학교') }
+  if($n -match '여고$'){ return ($n -replace '여고$','여자고등학교') }
   switch($kind){
     '초' { if($n -match '초$'){ return $n + '등학교' } }
     '중' { if($n -match '중$'){ return $n + '학교' } }
@@ -88,7 +105,7 @@ foreach($grpItem in $GROUPS){
   $shortArea = (@($sgg, $dong) | Where-Object { $_ }) -join ' '
   if(-not $shortArea){ $shortArea = $region }
 
-  $title = "$shortArea 수학·영어 과외 — $headTxt 내신 | 공부의 온도"
+  $title = "$shortArea 수학·영어 과외 — $headTxt 내신 | 인천과외"
   $desc  = "$areaTxt 일대 $($allSchools.Count)개 학교 학생을 지도합니다. $headTxt 내신을 국어·영어·수학·과학·사회 1:1로 준비하세요. 방문과외·화상과외·학습센터 중에서 고를 수 있습니다."
   $lead  = $LEADS[$idx % $LEADS.Count]
 
@@ -99,7 +116,7 @@ foreach($grpItem in $GROUPS){
       $schoolBlocks += @"
         <div class="cd-srow">
           <b>$($grp.k)</b>
-          <span>$(Esc (($grp.v) -join ' · '))</span>
+          <span>$((($grp.v) | ForEach-Object { if(Test-Path -LiteralPath "$SITE\school\$_.html"){ "<a href=""../school/$([Uri]::EscapeDataString($_)).html"">$(Esc $_)</a>" } else { Esc $_ } }) -join ' · ')</span>
         </div>
 
 "@
@@ -156,12 +173,12 @@ foreach($grpItem in $GROUPS){
   $ld = [ordered]@{
     '@context'='https://schema.org'
     '@type'='EducationalOrganization'
-    'name'="공부의 온도 $shortArea"
+    'name'="인천과외 $shortArea"
     'description'=[string]$desc
     'url'="https://firststudy.co.kr/c/$([Uri]::EscapeDataString($name)).html"
     'address'=[ordered]@{ '@type'='PostalAddress'; 'addressLocality'=$sgg; 'addressRegion'=$region; 'streetAddress'=$addr; 'addressCountry'='KR' }
     'areaServed'=$areaTxt
-    'parentOrganization'=[ordered]@{ '@type'='EducationalOrganization'; 'name'='공부의 온도'; 'url'='https://firststudy.co.kr/' }
+    'parentOrganization'=[ordered]@{ '@type'='EducationalOrganization'; 'name'='인천과외'; 'url'='https://firststudy.co.kr/' }
   }
   $ldJson = $ld | ConvertTo-Json -Depth 6
 
@@ -194,14 +211,14 @@ $ldJson
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css?v=4">
+<link rel="stylesheet" href="../style.css?v=8">
 <script src="../analytics.js" defer></script>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a href="../index.html" class="logo"><span class="logo-dot"></span>공부의 온도</a>
+    <a href="../index.html" class="logo"><span class="logo-dot"></span>인천과외</a>
     <nav class="nav-menu" id="menu">
       <div class="nav-item">
         <a class="nav-top">과외 <span class="caret">▼</span></a>
@@ -210,6 +227,7 @@ $ldJson
           <a href="../index.html#online"><span class="dot online"></span>화상과외</a>
         </div>
       </div>
+      <a href="../schools.html">학교별 과외</a>
       <a href="../centers.html">학습센터</a>
       <a href="../teachers.html">선생님 찾기</a>
       <a href="../blog.html">공부 이야기</a>
@@ -281,7 +299,7 @@ $subjBlocks    </div>
     <div class="t-grid">
 $teacherCards    </div>
     <div style="text-align:center;margin-top:30px">
-      <a href="../teachers.html" class="btn btn-ghost">선생님 750명 전체 보기</a>
+      <a href="../teachers.html" class="btn btn-ghost">선생님 전체 보기</a>
     </div>
   </div>
 </section>
@@ -305,13 +323,14 @@ $nearLinks    </div>
 <footer>
   <div class="wrap foot">
     <div>
-      <div class="logo"><span class="logo-dot"></span>공부의 온도</div>
-      <div>아이에게 맞는 공부 방식을 찾아 주는 곳</div>
+      <div class="logo"><span class="logo-dot"></span>인천과외</div>
+      <div>인천 초·중·고 학생을 위한 1:1 맞춤 과외</div>
     </div>
     <div>
       <div class="foot-links">
         <a href="../index.html#visit">방문과외</a>
         <a href="../index.html#online">화상과외</a>
+        <a href="../schools.html">학교별 과외</a>
         <a href="../centers.html">학습센터</a>
         <a href="../teachers.html">선생님 찾기</a>
         <a href="../blog.html">공부 이야기</a>
@@ -319,7 +338,7 @@ $nearLinks    </div>
         <a href="../grade-calculator.html">내신 등급 계산기</a>
         <a href="../status.html">수업 현황</a>
       </div>
-      <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
+      <div style="margin-top:16px">© 2026 인천과외. All rights reserved.</div>
     </div>
   </div>
 </footer>

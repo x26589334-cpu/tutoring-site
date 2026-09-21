@@ -1,10 +1,12 @@
 ﻿param([string]$Day = '')
 $ErrorActionPreference='Stop'
-# 오늘 올릴 2편을 골라 준다.
-#   1편(고정) = 지역 + 과목 글  — 안 쓴 (동네 x 과목) 조합, 학교 많은 동네부터
-#   2편(변동) = 요일별          — 월화목금: 질문형(FAQ) / 수토: 인포그래픽
+# 인천과외 — 오늘 올릴 2편을 골라 준다. (2026-09-21 인천 전담으로 개편)
+#   1편(고정) = 인천 학교 + 과목 글  — 안 쓴 (학교 x 과목) 조합
+#               과목·구·학교급이 골고루 돌도록: 적게 쓴 과목 → 적게 쓴 구 → 적게 쓴 학교급 순
+#   2편(변동) = 요일별                — 월화목금: 질문형(FAQ) / 수토: 인포그래픽
 # 사용법:  .\tools\next_post.ps1            (오늘 요일 자동)
 #          .\tools\next_post.ps1 -Day 수    (요일 지정)
+# 데일리 자동화(사이트관리/데일리/지시서/공부의온도.md)가 이 출력을 그대로 따른다.
 
 $SITE = Split-Path $PSScriptRoot -Parent
 $BLOG = "$SITE\blog"
@@ -21,49 +23,47 @@ function MetaOf($html, $name){
   return ''
 }
 
+$SCH = Load-Js "$SITE\incheon-schools.js" 'window.INC_SCHOOLS='
+$CEN = @(Load-Js "$SITE\centers-data.js" 'window.CENTERS=')
+$SUBJECTS = '수학','영어','국어','과학','사회'
+$LV_NAME = @{ '초'='초등학교'; '중'='중학교'; '고'='고등학교' }
+
 # ---------- 이미 쓴 글 ----------
-$usedCombo = @{}
-$usedArea  = @{}
+$usedCombo = @{}   # "학교명|과목"
+$usedSchool = @{}
+$subjCount = @{}; foreach($s in $SUBJECTS){ $subjCount[$s] = 0 }
+$guCount = @{}; $lvCount = @{ '초'=0; '중'=0; '고'=0 }
 $usedTitle = New-Object System.Collections.Generic.List[string]
+$schByName = @{}; foreach($s in $SCH){ $schByName[$s.n] = $s }
 foreach($f in (Get-ChildItem "$BLOG\*.html" -ErrorAction SilentlyContinue)){
   $h = [IO.File]::ReadAllText($f.FullName, [Text.Encoding]::UTF8)
-  $ct = MetaOf $h 'article:center'
-  $sj = MetaOf $h 'article:subject'
-  if($ct -and $sj){ $usedCombo["$ct|$sj"] = $true; $usedArea[$ct] = 1 + $usedArea[$ct] }
   $mt = [regex]::Match($h, '<title>([^<]*)</title>')
-  if($mt.Success){ $usedTitle.Add(($mt.Groups[1].Value -replace '\s*\|\s*공부의 온도\s*$','')) }
-}
-
-# ---------- 트랙 A ----------
-$CEN = Load-Js "$SITE\centers-data.js" 'window.CENTERS='
-$SUBJECTS = '수학','영어','국어','과학','사회'
-
-$rows = foreach($g in ($CEN | Group-Object name)){
-  $rs = @($g.Group)
-  $e  = @($rs | ForEach-Object { $_.elem -split ',' } | ForEach-Object { $_.Trim() } | Where-Object { $_ } | Sort-Object -Unique)
-  $mi = @($rs | ForEach-Object { $_.mid  -split ',' } | ForEach-Object { $_.Trim() } | Where-Object { $_ } | Sort-Object -Unique)
-  $hi = @($rs | ForEach-Object { $_.high -split ',' } | ForEach-Object { $_.Trim() } | Where-Object { $_ } | Sort-Object -Unique)
-  $sgg = ''
-  $parts = ($rs[0].addr -split '\s+') | Where-Object { $_ }
-  if($parts.Count -ge 2 -and $parts[1] -match '(시|군|구)$'){ $sgg = $parts[1] }
-  # 동 필드에 도시명이 겹쳐 들어간 경우 정리 — "경산시" + "경산 사동" → "경산 사동" 이 아니라 "사동"
-  $dong = [string]$rs[0].dong
-  # "광주 월계동", "대전 태평동" 처럼 앞에 도시명이 붙은 경우: 첫 어절이 동·읍·면·리·가로 안 끝나면 떼어낸다
-  $tok = @($dong -split '\s+' | Where-Object { $_ })
-  if($tok.Count -ge 2 -and $tok[0] -notmatch '(동|읍|면|리|가)$'){ $dong = ($tok[1..($tok.Count-1)] -join ' ') }
-  [pscustomobject]@{
-    center=$g.Name; region=$rs[0].region; dong=$dong; sgg=$sgg
-    ele=$e; mid=$mi; hig=$hi; total=($e.Count+$mi.Count+$hi.Count); used=[int]$usedArea[$g.Name]
+  if($mt.Success){ $usedTitle.Add(($mt.Groups[1].Value -replace '\s*\|\s*(인천과외|공부의 온도)\s*$','')) }
+  $sc = MetaOf $h 'article:school'
+  $sj = MetaOf $h 'article:subject'
+  if($sc -and $sj -and $schByName.ContainsKey($sc)){
+    $usedCombo["$sc|$sj"] = $true
+    $usedSchool[$sc] = 1 + $usedSchool[$sc]
+    if($subjCount.ContainsKey($sj)){ $subjCount[$sj]++ }
+    $g = $schByName[$sc].g; $guCount[$g] = 1 + $guCount[$g]
+    $lvCount[$schByName[$sc].t]++
   }
 }
 
-# ---------- 증상 은행 ----------
-$SYMPTOM = @{
+# ---------- 증상 은행 (학교급 x 과목) ----------
+$SYM_MH = @{
   '수학' = @('계산은 맞는데 서술형에서만 깎인다면','학원은 다니는데 시험만 보면 무너진다면','개념은 아는데 응용문제에서 손이 멈춘다면','오답노트를 쓰는데 같은 걸 또 틀린다면','진도는 나갔는데 앞 단원이 비어 있다면','문제는 푸는데 시간이 늘 모자란다면')
   '영어' = @('단어는 외우는데 문장이 안 읽힌다면','지문은 읽었는데 답이 틀린다면','내신은 되는데 모의고사가 안 된다면','문법 문제만 나오면 찍는다면','영작 서술형에서 다 깎인다면')
   '국어' = @('문제집은 푸는데 점수가 그대로라면','비문학만 나오면 시간이 모자란다면','문학 해석이 매번 제각각이라면','수행평가 글쓰기에서 감점된다면','어휘를 몰라 지문이 안 읽힌다면')
   '과학' = @('공식은 외웠는데 단위에서 틀린다면','실험 문제만 나오면 막힌다면','암기는 되는데 계산이 안 된다면','그래프 해석에서 막힌다면')
   '사회' = @('외울 게 많아 손을 못 대고 있다면','역사 흐름이 안 잡힌다면','자료·지도 해석에서 틀린다면','서술형에서 키워드를 못 쓴다면')
+}
+$SYM_E = @{
+  '수학' = @('연산은 되는데 문장제만 나오면 막힌다면','분수에서 처음 막혔다면','구구단은 외웠는데 곱셈 응용이 안 된다면','단원평가 점수가 들쭉날쭉하다면')
+  '영어' = @('파닉스는 뗐는데 문장이 안 읽힌다면','단어 시험만 보고 나면 잊어버린다면','영어 교과가 시작되고 흥미를 잃었다면')
+  '국어' = @('책은 읽는데 내용을 설명하지 못한다면','맞춤법·받아쓰기가 계속 틀린다면','글쓰기 숙제 앞에서 멈춘다면')
+  '과학' = @('실험은 좋아하는데 정리를 못 한다면','관찰 기록을 쓰기 어려워한다면')
+  '사회' = @('지도·그래프 읽기가 어렵다면','5학년 역사가 처음이라 막막하다면','외울 게 많다고 사회를 싫어한다면')
 }
 
 # ---------- 질문 은행 ----------
@@ -83,6 +83,9 @@ $QUESTIONS = @(
   '수업 시간에 부모가 같이 있어도 되나요?'
   '과외 첫 수업에서 무엇을 봐야 하나요?'
   '아이가 자꾸 숙제를 안 해 갑니다. 어떻게 해야 하나요?'
+  '인천에서 방문과외와 화상과외 중 어느 쪽이 나을까요?'
+  '강화·옹진 같은 섬 지역도 1:1 과외를 받을 수 있나요?'
+  '고1 5등급제 첫 내신, 인천 고등학생은 무엇부터 준비해야 하나요?'
 )
 
 # ---------- 인포그래픽 은행 ----------
@@ -97,6 +100,7 @@ $INFOGRAPHICS = @(
   '초·중·고 과목별 시험 유형 정리'
   '겨울방학 6주 학습 계획표'
   '수행평가 감점 유형 정리'
+  '인천 구·군별 초·중·고 학교 수 한눈에 보기'
 )
 
 # ---------- 요일 ----------
@@ -105,75 +109,58 @@ if(-not $Day){ $Day = $dayMap[ [int]((Get-Date).DayOfWeek) ] }
 $trackB = if($Day -eq '수' -or $Day -eq '토'){ '인포그래픽' } else { '질문형' }
 
 "==============================================="
-"  오늘($($Day)요일) 올릴 2편"
+"  오늘($($Day)요일) 올릴 2편 — 인천과외"
 "==============================================="
 
-# ---------- 1편 ----------
-# (2026-09-15) 두 가지를 바꿨다.
-#  1) 과목 로테이션 — 예전엔 '안 쓴 동네의 첫 빈 과목'을 골라서 새 동네마다 항상 수학이 나왔다
-#     (9/10~9/15 지역 글 5편이 전부 수학). 이제는 지금까지 가장 적게 쓴 과목부터 고른다.
-#  2) 지방 우선 — 서울·경기·인천은 뒤로 미룬다. 지방 70개 동네 x 5과목 = 350편(약 1년치).
-#     지방 조합이 다 떨어졌을 때만 수도권으로 넘어간다.
-$METRO = @('서울','경기','인천')
-$regionOf = @{}
-foreach($r in $rows){ $regionOf[$r.center] = $r.region }
-
-$subjCount = @{}; foreach($s in $SUBJECTS){ $subjCount[$s] = 0 }
-$regionUsed = @{}
-foreach($k in $usedCombo.Keys){
-  $cn,$sj0 = $k -split '\|',2
-  if($subjCount.ContainsKey($sj0)){ $subjCount[$sj0]++ }
-  $rg = $regionOf[$cn]; if($rg){ $regionUsed[$rg] = 1 + $regionUsed[$rg] }
-}
-# 적게 쓴 과목 순 (같으면 수학·영어·국어·과학·사회 순)
+# ---------- 1편: 학교 x 과목 ----------
 $subjOrder = $SUBJECTS | Sort-Object @{e={ $subjCount[$_] }}, @{e={ [array]::IndexOf($SUBJECTS, $_) }}
-
-$pick = $null; $pickSj = $null; $fallback = $false
-foreach($pass in @('지방','수도권')){
-  foreach($sj in $subjOrder){
-    $pool = @($rows | Where-Object {
-      -not $usedCombo.ContainsKey("$($_.center)|$sj") -and
-      ( ($pass -eq '지방') -xor ($METRO -contains $_.region) )
-    })
+$lvOrder   = @('중','고','초') | Sort-Object @{e={ $lvCount[$_] }}, @{e={ [array]::IndexOf(@('중','고','초'), $_) }}
+$pick = $null; $pickSj = $null
+foreach($sj in $subjOrder){
+  foreach($lv in $lvOrder){
+    $pool = @($SCH | Where-Object { $_.t -eq $lv -and -not $usedCombo.ContainsKey("$($_.n)|$sj") })
     if(-not $pool.Count){ continue }
-    # 한 도시에 몰리지 않게: 덜 쓴 동네 → 덜 쓴 시도 → 학교 많은 동네
-    $pick = $pool | Sort-Object @{e='used'}, @{e={ [int]$regionUsed[$_.region] }}, @{e='total'; Descending=$true} | Select-Object -First 1
+    # 한 학교·한 구에 몰리지 않게: 덜 쓴 학교 → 덜 쓴 구 → 이름순(매번 같은 결과)
+    $pick = $pool | Sort-Object @{e={ [int]$usedSchool[$_.n] }}, @{e={ [int]$guCount[$_.g] }}, @{e='n'} | Select-Object -First 1
     $pickSj = $sj
-    if($pass -eq '수도권'){ $fallback = $true }
     break
   }
   if($pick){ break }
 }
 
-$done = $false
-foreach($r in @($pick)){
-  if($done -or -not $r){ break }
-  foreach($sj in @($pickSj)){
-    # 광역시·특별자치시는 구 이름만으론 어느 도시인지 모호하다(북구·동구는 여러 도시에 있다) → 도시명을 앞에 붙인다
-    #   울산 북구 송정동 / 대구 달서구 월성동 / 세종 새롬동      도(道) 지역은 그대로: 경산시 사동
-    $cityFirst = @('서울','부산','대구','인천','광주','대전','울산','세종')
-    if($cityFirst -contains $r.region -and ($r.sgg -match '구$' -or -not $r.sgg)){
-      $area = (@($r.region, $r.sgg, $r.dong) | Where-Object { $_ }) -join ' '
-    } else {
-      $area = (@($r.sgg, $r.dong) | Where-Object { $_ }) -join ' '
-    }
-    if($fallback){ "   ※ 지방 조합이 모두 소진되어 수도권 동네를 제안합니다." }
-    ""
-    "[1] 지역 + 과목 --------------------------------"
-    "   article:kind     지역"
-    "   article:center   $($r.center)"
-    "   article:area     $area"
-    "   article:subject  $sj"
-    "   센터 페이지       ../c/$($r.center).html"
-    "   중학교($($r.mid.Count))  $($r.mid -join ', ')"
-    "   고등학교($($r.hig.Count)) $($r.hig -join ', ')"
-    "   초등학교($($r.ele.Count)) $($r.ele -join ', ')"
-    ""
-    "   제목 후보 (증상 하나 고르기)"
-    foreach($sym in $SYMPTOM[$sj]){ "     - $area {학년}$($sj)과외 - $sym" }
-    $done = $true
-    break
-  }
+if($pick){
+  $s = $pick; $sj = $pickSj
+  $area = "인천 $($s.g)"
+  $near = @($SCH | Where-Object { $_.g -eq $s.g -and $_.t -eq $s.t -and $_.n -ne $s.n } | Select-Object -First 6)
+  $next = @()
+  if($s.t -eq '초'){ $next = @($SCH | Where-Object { $_.g -eq $s.g -and $_.t -eq '중' } | Select-Object -First 4) }
+  if($s.t -eq '중'){ $next = @($SCH | Where-Object { $_.g -eq $s.g -and $_.t -eq '고' } | Select-Object -First 4) }
+  $cen = @($CEN | Where-Object { (($_.addr -split '\s+')[1]) -eq $s.g } | Group-Object name | ForEach-Object { $_.Group[0] })
+  $grades = @{ '초'='초3~초6'; '중'='중1~중3'; '고'='고1~고3' }[$s.t]
+  ""
+  "[1] 인천 학교 + 과목 ----------------------------"
+  "   article:kind     지역"
+  "   article:area     $area"
+  "   article:school   $($s.n)"
+  "   article:subject  $sj"
+  if($cen.Count){ "   article:center   $($cen[0].name)" }
+  "   학교            $($s.n) ($($s.a)) · $($LV_NAME[$s.t]) · $area"
+  "   학교 페이지      ../school/$($s.n).html   ← 하단 '이어서 보기' 첫 줄에 반드시 링크"
+  if($cen.Count){ "   센터 페이지      " + (($cen | ForEach-Object { "../c/$($_.name).html($($_.dong))" }) -join ', ') }
+  else { "   센터            $area 에는 학습센터가 없다 → ../centers.html 로 링크" }
+  "   같은 구 $($LV_NAME[$s.t])  " + (($near | ForEach-Object { $_.n }) -join ', ')
+  if($next.Count){ "   진학하는 학교      " + (($next | ForEach-Object { $_.n }) -join ', ') }
+  ""
+  "   제목 형식: 인천 {구} {학교 정식명칭} {학년}{과목}과외 — {증상}   (학년: $grades 중 하나)"
+  "   제목 후보 (증상 하나 고르기)"
+  $bank = if($s.t -eq '초'){ $SYM_E[$sj] } else { $SYM_MH[$sj] }
+  foreach($sym in $bank){ "     - $area $($s.n) {학년}$($sj)과외 — $sym" }
+  ""
+  "   ※ 학교명은 정식 명칭으로 쓰고 약칭은 첫 언급에 괄호로 한 번만: $($s.n)($($s.a))"
+  "   ※ 그 학교의 시험 난이도·출제 경향 같은 건 우리가 모른다 → 지어내지 말고 학년·과목 일반론으로 쓴다"
+} else {
+  ""
+  "[1] 인천 학교 x 과목 조합을 모두 썼다 — 은행을 늘리거나 코딩·전과목 축을 추가할 것"
 }
 
 # ---------- 2편 ----------
@@ -182,6 +169,7 @@ foreach($r in @($pick)){
 if($trackB -eq '질문형'){
   "   article:kind     질문"
   "   ** FAQPage 구조화 데이터를 반드시 넣을 것 (이 트랙의 목적)"
+  "   ** 가능하면 본문에 '인천' 맥락을 한두 문장 넣는다 (구 이름·통학·섬 지역 등 사실만)"
   ""
   "   안 쓴 질문"
   $n = 0
@@ -208,11 +196,10 @@ if($trackB -eq '질문형'){
 $written = @(Get-ChildItem "$BLOG\*.html" -ErrorAction SilentlyContinue).Count
 ""
 "-----------------------------------------------"
-"쓴 글 $written 편"
-$localRows = @($rows | Where-Object { $METRO -notcontains $_.region })
-$localUsed = @($usedCombo.Keys | Where-Object { $METRO -notcontains $regionOf[($_ -split '\|')[0]] }).Count
-"  지방 x 과목 남은 조합 $(($localRows.Count * $SUBJECTS.Count) - $localUsed)개 (지방 $($localRows.Count)개 동네)"
-"  과목별 지역 글 수   " + (($SUBJECTS | ForEach-Object { "$_ $($subjCount[$_])" }) -join ' / ')
+"쓴 글 $written 편 (인천 학교 글 $($usedCombo.Count)편)"
+"  인천 학교 x 과목 남은 조합 $(($SCH.Count * $SUBJECTS.Count) - $usedCombo.Count)개 (학교 $($SCH.Count)곳)"
+"  과목별  " + (($SUBJECTS | ForEach-Object { "$_ $($subjCount[$_])" }) -join ' / ')
+"  학교급별 초 $($lvCount['초']) / 중 $($lvCount['중']) / 고 $($lvCount['고'])"
 "  질문 은행 $($QUESTIONS.Count)개 / 인포그래픽 은행 $($INFOGRAPHICS.Count)개"
 ""
 "올린 뒤:  .\tools\build_blog.ps1  ->  .\tools\build_sitemap.ps1  ->  commit/push"

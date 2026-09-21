@@ -50,13 +50,13 @@ foreach($p in $LIST){
   # ----- 제목 / 설명 (지역·과목 키워드를 앞세운다) -----
   if($way -eq '화상'){
     $h1sub  = "전국 화상 $subjTxt 과외"
-    $title  = "$firstSubj 화상과외 — 전국 1:1 · $nm 선생님 | 공부의 온도"
-    $desc   = "$($p.tag). 전국 어디서나 가능한 $subjTxt 1:1 화상과외 선생님입니다. 공부의 온도에서 무료 상담으로 시작하세요."
+    $title  = "$firstSubj 화상과외 — 전국 1:1 · $nm 선생님 | 인천과외"
+    $desc   = "$($p.tag). 전국 어디서나 가능한 $subjTxt 1:1 화상과외 선생님입니다. 인천과외에서 무료 상담으로 시작하세요."
     $whereL = '전국 (화상 수업)'
   } else {
     $h1sub  = "$regionHead $subjTxt 과외"
-    $title  = "$regionHead $firstSubj 과외 — 방문 1:1 · $nm 선생님 | 공부의 온도"
-    $desc   = "$($p.tag). $regionHead 지역 $subjTxt 1:1 $way 과외 선생님입니다. 공부의 온도에서 무료 상담으로 시작하세요."
+    $title  = "$regionHead $firstSubj 과외 — 방문 1:1 · $nm 선생님 | 인천과외"
+    $desc   = "$($p.tag). $regionHead 지역 $subjTxt 1:1 $way 과외 선생님입니다. 인천과외에서 무료 상담으로 시작하세요."
     $whereL = ($regions -join ' · ')
   }
 
@@ -144,7 +144,7 @@ $($cards -join "`n")
     'jobTitle'='1:1 과외 선생님'
     'description'=[string]$p.tag
     'knowsAbout'=@($p.s)
-    'worksFor'=@{ '@type'='EducationalOrganization'; 'name'='공부의 온도'; 'url'='https://firststudy.co.kr/' }
+    'worksFor'=@{ '@type'='EducationalOrganization'; 'name'='인천과외'; 'url'='https://firststudy.co.kr/' }
     'url'="https://firststudy.co.kr/t/$id.html"
   }
   if($way -ne '화상' -and $regions.Count){ $ld['areaServed'] = @($regions) }
@@ -175,14 +175,14 @@ $ldJson
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../style.css?v=3">
+<link rel="stylesheet" href="../style.css?v=8">
 <script src="../analytics.js" defer></script>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a href="../index.html" class="logo"><span class="logo-dot"></span>공부의 온도</a>
+    <a href="../index.html" class="logo"><span class="logo-dot"></span>인천과외</a>
     <nav class="nav-menu" id="menu">
       <div class="nav-item">
         <a class="nav-top">과외 <span class="caret">▼</span></a>
@@ -191,6 +191,7 @@ $ldJson
           <a href="../index.html#online"><span class="dot online"></span>화상과외</a>
         </div>
       </div>
+      <a href="../schools.html">학교별 과외</a>
       <a href="../centers.html">학습센터</a>
       <a href="../teachers.html">선생님 찾기</a>
       <a href="../blog.html">공부 이야기</a>
@@ -247,20 +248,21 @@ $relHtml
 <footer>
   <div class="wrap foot">
     <div>
-      <div class="logo"><span class="logo-dot"></span>공부의 온도</div>
-      <div>아이에게 맞는 공부 방식을 찾아 주는 곳</div>
+      <div class="logo"><span class="logo-dot"></span>인천과외</div>
+      <div>인천 초·중·고 학생을 위한 1:1 맞춤 과외</div>
     </div>
     <div>
       <div class="foot-links">
         <a href="../index.html#visit">방문과외</a>
         <a href="../index.html#online">화상과외</a>
+        <a href="../schools.html">학교별 과외</a>
         <a href="../centers.html">학습센터</a>
         <a href="../teachers.html">선생님 찾기</a>
         <a href="../blog.html">공부 이야기</a>
         <a href="../grade-calculator.html">내신 등급 계산기</a>
         <a href="../status.html">수업 현황</a>
       </div>
-      <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
+      <div style="margin-top:16px">© 2026 인천과외. All rights reserved.</div>
     </div>
   </div>
 </footer>

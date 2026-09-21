@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>학습센터 찾기 | 공부의 온도 — 전국 205개 센터</title>
-<meta name="description" content="집 근처 학습센터를 찾아보세요. 정해진 시간에 나와 편하게 공부하고, 막히면 바로 물어볼 수 있는 곳. 전국 205개 센터를 지역·학교·동네 이름으로 검색할 수 있습니다.">
+<title>인천 학습센터 찾기 — 연수구·남동구·부평구·서해구 10곳 | 인천과외</title>
+<meta name="description" content="집 근처 학습센터를 찾아보세요. 정해진 시간에 나와 편하게 공부하고, 막히면 바로 물어볼 수 있는 곳. 인천 연수구·남동구·부평구·서해구의 학습센터 10곳을 동네·학교 이름으로 찾을 수 있습니다.">
 <link rel="canonical" href="https://firststudy.co.kr/centers.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="학습센터 찾기 | 공부의 온도">
-<meta property="og:description" content="집 근처에서 편하게 공부할 수 있는 학습센터 205곳을 찾아보세요.">
+<meta property="og:title" content="학습센터 찾기 | 인천과외">
+<meta property="og:description" content="인천에서 집 가까이 편하게 공부할 수 있는 학습센터 10곳.">
 <meta property="og:url" content="https://firststudy.co.kr/centers.html">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://firststudy.co.kr/apple-touch-icon.png">
@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
   <script src="analytics.js" defer></script>
 </head>
 <body>
@@ -28,7 +28,7 @@
 <!-- ============ 헤더 ============ -->
 <header>
   <div class="wrap nav">
-    <a href="index.html" class="logo"><span class="logo-dot"></span>공부의 온도</a>
+    <a href="index.html" class="logo"><span class="logo-dot"></span>인천과외</a>
     <nav class="nav-menu" id="menu">
       <div class="nav-item">
         <a class="nav-top">과외 <span class="caret">▼</span></a>
@@ -37,6 +37,7 @@
           <a href="index.html#online"><span class="dot online"></span>화상과외</a>
         </div>
       </div>
+      <a href="schools.html">학교별 과외</a>
       <a href="centers.html">학습센터</a>
       <a href="teachers.html">선생님 찾기</a>
       <a href="blog.html">공부 이야기</a>
@@ -53,12 +54,12 @@
     <h1>그냥 와서,<br><em>편하게 공부하는 곳</em></h1>
     <p>정해진 시간에 나와 앉으면 그날 공부가 시작됩니다.<br>
       막히면 바로 물어보고, 수업이 끝나도 자습실에 남아 하던 걸 마저 하면 됩니다.<br>
-      전국 <span class="cnt" id="cTotal">205</span>곳 중 집에서 가까운 곳을 찾아보세요.</p>
+      인천 <span class="cnt" id="cTotal">10</span>곳 중 집에서 가까운 곳을 찾아보세요.</p>
 
     <div class="c-finder">
       <div class="c-search">
         <input type="search" id="center-search" autocomplete="off" aria-label="센터 검색"
-               placeholder="검색 (예: 분당 불곡중, 신정동, 목일중학교, 일산)">
+               placeholder="검색 (예: 송도, 구월동, 부평고, 청라)">
       </div>
       <div class="c-regions" id="center-regions" aria-label="지역 필터"></div>
       <p class="c-count" id="center-count"></p>
@@ -97,19 +98,20 @@
 <footer>
   <div class="wrap foot">
     <div>
-      <div class="logo"><span class="logo-dot"></span>공부의 온도</div>
-      <div>아이에게 맞는 공부 방식을 찾아 주는 곳</div>
+      <div class="logo"><span class="logo-dot"></span>인천과외</div>
+      <div>인천 초·중·고 학생을 위한 1:1 맞춤 과외</div>
     </div>
     <div>
       <div class="foot-links">
         <a href="index.html#visit">방문과외</a>
         <a href="index.html#online">화상과외</a>
+        <a href="schools.html">학교별 과외</a>
         <a href="centers.html">학습센터</a>
         <a href="teachers.html">선생님 찾기</a>
       <a href="blog.html">공부 이야기</a>
       <a href="grade-calculator.html">내신 등급 계산기</a>
         <a href="status.html">수업 현황</a>
-      </div>      <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
+      </div>      <div style="margin-top:16px">© 2026 인천과외. All rights reserved.</div>
     </div>
   </div>
 </footer>
@@ -126,7 +128,7 @@
   </div>
 </div>
 
-<script src="centers-data.js?v=1"></script>
+<script src="centers-data.js?v=2"></script>
 <script src="search-kit.js?v=1"></script>
 <script>
 /* 모바일 메뉴 */
@@ -153,8 +155,10 @@ menu.addEventListener('click', function(e){ if(e.target.tagName === 'A' && e.tar
   document.getElementById('cTotal').textContent = DATA.length;
 
   /* 지역별 개수 집계 + 정렬(개수 많은 순) */
+  /* 인천 전담 — 시도 대신 구 단위로 묶는다 (주소 두 번째 어절: '인천 연수구 …') */
+  function guOf(c){ return (c.addr || '').split(/\s+/)[1] || c.region; }
   var counts = {};
-  DATA.forEach(function(c){ counts[c.region] = (counts[c.region] || 0) + 1; });
+  DATA.forEach(function(c){ counts[guOf(c)] = (counts[guOf(c)] || 0) + 1; });
   var regions = Object.keys(counts).sort(function(a,b){ return counts[b] - counts[a]; });
 
   function makeBtn(label, region, active){
@@ -179,7 +183,7 @@ menu.addEventListener('click', function(e){ if(e.target.tagName === 'A' && e.tar
 
   /* 검색 문자열 캐시 — 학교 약칭 통일·띄어쓰기 무시는 search-kit.js 가 처리 */
   var relEl  = document.getElementById('center-related');
-  var REL_FIELDS = ['region', 'dong', 'elem', 'mid', 'high'];
+  var REL_FIELDS = ['dong', 'elem', 'mid', 'high'];   /* 인천 전담이라 region(=인천) 칩은 뺀다 */
   var hayOf = SearchKit.indexer(
     function(c){ return c.name + '|' + c.addr; },
     function(c){ return c.name + ' ' + c.region + ' ' + c.addr + ' ' + (c.dong || '') + ' ' + c.elem + ' ' + c.mid + ' ' + c.high; }
@@ -194,7 +198,7 @@ menu.addEventListener('click', function(e){ if(e.target.tagName === 'A' && e.tar
   function filtered(){
     /* 지역 버튼 AND 검색어 (검색어는 낱말 전부 포함 + 띄어쓰기 무시) */
     return DATA.filter(function(c){
-      if(activeRegion !== '전체' && c.region !== activeRegion) return false;
+      if(activeRegion !== '전체' && guOf(c) !== activeRegion) return false;
       return SearchKit.match(hayOf(c), keyword);
     });
   }
@@ -227,7 +231,7 @@ menu.addEventListener('click', function(e){ if(e.target.tagName === 'A' && e.tar
     gridEl.innerHTML = slice.map(function(c){
       var q = encodeURIComponent(c.name);
       return '<article class="c-card">'
-        + '<div class="cc-head"><span class="cc-region">' + c.region + '</span>'
+        + '<div class="cc-head"><span class="cc-region">' + guOf(c) + '</span>'
           + '<h3><a href="c/' + q + '.html">' + c.name + '</a></h3></div>'
         + '<p class="cc-addr"><span class="ic">📍</span>' + c.addr + '</p>'
         + '<div class="cc-schools">' + schoolRow('초', c.elem) + schoolRow('중', c.mid) + schoolRow('고', c.high) + '</div>'

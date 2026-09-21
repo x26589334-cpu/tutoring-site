@@ -24,7 +24,7 @@ foreach($f in (Get-ChildItem "$BLOG\*.html" -ErrorAction SilentlyContinue)){
   $h = [IO.File]::ReadAllText($f.FullName, [Text.Encoding]::UTF8)
   $title = ''
   $mt = [regex]::Match($h, '<title>([^<]*)</title>')
-  if($mt.Success){ $title = $mt.Groups[1].Value -replace '\s*\|\s*공부의 온도\s*$','' }
+  if($mt.Success){ $title = $mt.Groups[1].Value -replace '\s*\|\s*인천과외\s*$','' }
   $desc = ''
   $md = [regex]::Match($h, '<meta\s+name="description"\s+content="([^"]*)"')
   if($md.Success){ $desc = $md.Groups[1].Value }
@@ -68,11 +68,11 @@ $listHtml = @"
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>공부 이야기 | 공부의 온도 — 지역·학교별 과외 이야기</title>
-<meta name="description" content="동네와 학교에 맞춘 과외 이야기, 상담에서 자주 나오는 질문을 매일 씁니다. 우리 아이가 다니는 학교, 지금 막힌 과목에서 시작하세요.">
+<title>인천 과외 이야기 — 학교별·과목별 공부 이야기 | 인천과외</title>
+<meta name="description" content="인천 초·중·고 학교별 과외 이야기와 상담에서 자주 나오는 질문을 매일 씁니다. 우리 아이가 다니는 학교, 지금 막힌 과목에서 시작하세요.">
 <link rel="canonical" href="https://firststudy.co.kr/blog.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="공부 이야기 | 공부의 온도">
+<meta property="og:title" content="공부 이야기 | 인천과외">
 <meta property="og:description" content="동네와 학교 이야기, 자주 나오는 질문을 매일.">
 <meta property="og:url" content="https://firststudy.co.kr/blog.html">
 <meta property="og:locale" content="ko_KR">
@@ -81,18 +81,18 @@ $listHtml = @"
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#FDFBF7">
-<link rel="alternate" type="application/rss+xml" title="공부의 온도" href="rss.xml">
+<link rel="alternate" type="application/rss+xml" title="인천과외" href="rss.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 <script src="analytics.js" defer></script>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a href="index.html" class="logo"><span class="logo-dot"></span>공부의 온도</a>
+    <a href="index.html" class="logo"><span class="logo-dot"></span>인천과외</a>
     <nav class="nav-menu" id="menu">
       <div class="nav-item">
         <a class="nav-top">과외 <span class="caret">▼</span></a>
@@ -101,6 +101,7 @@ $listHtml = @"
           <a href="index.html#online"><span class="dot online"></span>화상과외</a>
         </div>
       </div>
+      <a href="schools.html">학교별 과외</a>
       <a href="centers.html">학습센터</a>
       <a href="teachers.html">선생님 찾기</a>
       <a href="blog.html">공부 이야기</a>
@@ -114,7 +115,7 @@ $listHtml = @"
 <section class="t-hero">
   <div class="wrap">
     <p class="eyebrow">공부 이야기</p>
-    <h1>우리 동네, 우리 학교<br><em>이야기부터</em></h1>
+    <h1>인천 우리 동네, 우리 학교<br><em>이야기부터</em></h1>
     <p>같은 학년이어도 다니는 학교가 다르면 준비도 달라집니다.<br>동네와 학교 이야기, 상담에서 자주 나오는 질문을 매일 씁니다. 지금 <b>$($posts.Count)편</b>.</p>
   </div>
 </section>
@@ -138,20 +139,21 @@ $($cards -join "`n")
 <footer>
   <div class="wrap foot">
     <div>
-      <div class="logo"><span class="logo-dot"></span>공부의 온도</div>
-      <div>아이에게 맞는 공부 방식을 찾아 주는 곳</div>
+      <div class="logo"><span class="logo-dot"></span>인천과외</div>
+      <div>인천 초·중·고 학생을 위한 1:1 맞춤 과외</div>
     </div>
     <div>
       <div class="foot-links">
         <a href="index.html#visit">방문과외</a>
         <a href="index.html#online">화상과외</a>
+        <a href="schools.html">학교별 과외</a>
         <a href="centers.html">학습센터</a>
         <a href="teachers.html">선생님 찾기</a>
         <a href="blog.html">공부 이야기</a>
         <a href="grade-calculator.html">내신 등급 계산기</a>
         <a href="status.html">수업 현황</a>
       </div>
-      <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
+      <div style="margin-top:16px">© 2026 인천과외. All rights reserved.</div>
     </div>
   </div>
 </footer>
@@ -186,7 +188,7 @@ $rss = @"
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>공부의 온도 — 공부 이야기</title>
+    <title>인천과외 — 공부 이야기</title>
     <link>https://firststudy.co.kr/blog.html</link>
     <description>동네와 학교 이야기, 상담에서 자주 나오는 질문을 매일.</description>
     <language>ko</language>

@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>선생님 찾기 | 공부의 온도 — 방문·화상과외 선생님 750명</title>
-<meta name="description" content="공부의 온도와 함께하는 선생님 750명을 방식·과목·지역으로 찾아보세요. 집으로 오는 방문과외, 전국 어디서나 되는 화상과외 선생님을 한 곳에서 비교할 수 있습니다.">
+<title>인천 과외 선생님 찾기 — 인천 방문과외·화상과외 선생님 | 인천과외</title>
+<meta name="description" content="인천 연수구·남동구·부평구·서해구 등을 찾아가는 방문과외 선생님과, 인천 어디서나 수업하는 화상과외 선생님을 방식·과목·구별로 찾아보세요.">
 <link rel="canonical" href="https://firststudy.co.kr/teachers.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="선생님 찾기 | 공부의 온도">
-<meta property="og:description" content="방식·과목·지역으로 찾는 방문·화상과외 선생님 750명.">
+<meta property="og:title" content="인천 과외 선생님 찾기 | 인천과외">
+<meta property="og:description" content="인천 방문과외·화상과외 선생님을 방식·과목·구별로.">
 <meta property="og:url" content="https://firststudy.co.kr/teachers.html">
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://firststudy.co.kr/apple-touch-icon.png">
@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
   <script src="analytics.js" defer></script>
 </head>
 <body>
@@ -28,7 +28,7 @@
 <!-- ============ 헤더 ============ -->
 <header>
   <div class="wrap nav">
-    <a href="index.html" class="logo"><span class="logo-dot"></span>공부의 온도</a>
+    <a href="index.html" class="logo"><span class="logo-dot"></span>인천과외</a>
     <nav class="nav-menu" id="menu">
       <div class="nav-item">
         <a class="nav-top">과외 <span class="caret">▼</span></a>
@@ -37,6 +37,7 @@
           <a href="index.html#online"><span class="dot online"></span>화상과외</a>
         </div>
       </div>
+      <a href="schools.html">학교별 과외</a>
       <a href="centers.html">학습센터</a>
       <a href="teachers.html">선생님 찾기</a>
       <a href="blog.html">공부 이야기</a>
@@ -51,7 +52,7 @@
   <div class="wrap">
     <p class="eyebrow">선생님 찾기</p>
     <h1>먼저 <em>방식</em>을 고르고,<br>그다음 선생님을 만나세요</h1>
-    <p>지금 <span class="cnt" id="tTotal">750</span>분의 선생님이 함께하고 있습니다.<br>집으로 오는 수업과 화면으로 만나는 수업, 아이에게 맞는 쪽부터 골라 보세요.</p>
+    <p>지금 <span class="cnt" id="tTotal">678</span>분의 선생님이 인천 학생과 함께합니다.<br>집으로 오는 수업과 화면으로 만나는 수업, 아이에게 맞는 쪽부터 골라 보세요.</p>
 
     <div class="t-search">
       <input id="tSearch" type="search" autocomplete="off" aria-label="선생님 검색"
@@ -68,7 +69,7 @@
 
     <div class="t-filters">
       <div class="t-row"><span class="lb">과목</span><div class="t-chips" id="fSubj"></div></div>
-      <div class="t-row"><span class="lb">지역</span><div class="t-chips" id="fSido"></div></div>
+      <div class="t-row"><span class="lb">방문 지역</span><div class="t-chips" id="fSido"></div></div>
       <div class="t-row"><span class="lb">선생님</span><div class="t-chips" id="fEtc"></div>
         <button type="button" class="t-reset" id="fReset">조건 초기화</button></div>
     </div>
@@ -93,19 +94,20 @@
 <footer>
   <div class="wrap foot">
     <div>
-      <div class="logo"><span class="logo-dot"></span>공부의 온도</div>
-      <div>아이에게 맞는 공부 방식을 찾아 주는 곳</div>
+      <div class="logo"><span class="logo-dot"></span>인천과외</div>
+      <div>인천 초·중·고 학생을 위한 1:1 맞춤 과외</div>
     </div>
     <div>
       <div class="foot-links">
         <a href="index.html#visit">방문과외</a>
         <a href="index.html#online">화상과외</a>
+        <a href="schools.html">학교별 과외</a>
         <a href="centers.html">학습센터</a>
         <a href="teachers.html">선생님 찾기</a>
       <a href="blog.html">공부 이야기</a>
       <a href="grade-calculator.html">내신 등급 계산기</a>
         <a href="status.html">수업 현황</a>
-      </div>      <div style="margin-top:16px">© 2026 공부의 온도. All rights reserved.</div>
+      </div>      <div style="margin-top:16px">© 2026 인천과외. All rights reserved.</div>
     </div>
   </div>
 </footer>
@@ -121,7 +123,9 @@ burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
 menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') menu.classList.remove('open'); });
 
 (function(){
-  var ALL = window.TEACHERS || [];
+  /* 인천 전담(2026-09-21): 인천을 방문하는 선생님 + 화상 가능한 선생님만 보여준다.
+     인천 밖 방문 전용 선생님(72명)은 인천 학생을 가르칠 수 없어 목록에서 뺀다. */
+  var ALL = (window.TEACHERS || []).filter(function(t){ return /화상/.test(t.c) || /인천/.test(t.sd || ''); });
   var PER = 30;                 /* 티칭코칭은 24명 페이지네이션, 여기는 30명씩 '더 보기' */
   var shown = PER;
 
@@ -160,12 +164,13 @@ menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') menu.cl
     }).join('');
 
   /* sd 는 "경기,충남" 처럼 여러 시도가 붙어 오는 경우가 있어 쪼개서 센다 */
-  function sidoList(t){ return t.sd ? t.sd.split(',') : []; }
+  /* '방문 지역' = 인천 구 단위 (r: '인천 부평구|인천 남동구') */
+  function sidoList(t){ return (t.r || '').split('|').filter(function(x){ return x.indexOf('인천 ') === 0; }).map(function(x){ return x.replace('인천 ',''); }); }
   var sidoCount = {};
   ALL.forEach(function(t){ sidoList(t).forEach(function(s){ sidoCount[s] = (sidoCount[s]||0)+1; }); });
   var SIDO = Object.keys(sidoCount).sort(function(a,b){ return sidoCount[b]-sidoCount[a]; });
   document.getElementById('fSido').innerHTML =
-    '<button type="button" class="t-chip on" data-sido="전체">전국</button>'
+    '<button type="button" class="t-chip on" data-sido="전체">전체</button>'
     + SIDO.map(function(s){
         return '<button type="button" class="t-chip" data-sido="' + s + '">' + s
              + ' <span style="opacity:.55">' + sidoCount[s] + '</span></button>';
@@ -272,8 +277,8 @@ menu.addEventListener('click', function(e){ if(e.target.tagName === 'A') menu.cl
   /* ---------- 카드 ---------- */
   function wayClass(c){ return c === '방문+화상' ? 'both' : c; }
   function whereText(t){
-    if(!t.r) return '전국 어디서나 · 화상 수업';
-    var parts = t.r.split('|');
+    if(!t.r || !/인천/.test(t.r)) return '인천 어디서나 · 화상 수업';
+    var parts = t.r.split('|').filter(function(x){ return /^인천 /.test(x); });   /* 인천 구만 표시 */
     var head = parts.slice(0,2).join(' · ');
     return head + (parts.length > 2 ? ' 외 ' + (parts.length - 2) + '곳' : '');
   }

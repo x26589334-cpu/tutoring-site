@@ -22,6 +22,8 @@ function CleanAddr($s){
   return $v.Trim()
 }
 
+# 인천 전담 사이트(인천과외, 2026-09-21) — 인천 센터만 남긴다
+$SRCLIST = @($SRCLIST | Where-Object { [string]$_.region -eq '인천' })
 $out = New-Object System.Collections.Generic.List[object]
 foreach($c in $SRCLIST){
   $out.Add([pscustomobject][ordered]@{
