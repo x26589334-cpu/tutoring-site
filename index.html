@@ -332,26 +332,26 @@ var PICKED = (function(){
   return { id:id, name:name, center:center };
 })();
 
-/* 상담 폼 → 구글 "웹 문의" 시트의 "공부의온도" 탭에 저장
-   (과외·키즈튜터·픽포스와 같은 공용 Apps Script 웹앱. sheet=탭이름 으로 구분) */
+/* 상담 폼 → 구글 "웹 문의" 시트의 "지역과외" 탭에 저장 (2026-10-03 사용자 결정: 공부의온도 탭 → 지역과외 탭으로 통합, 사이트=인천과외)
+   지역 과외 18곳 form.js 와 같은 항목 이름(사이트·지역·이름·연락처·학년·수업방식·남길말·신청페이지)을 써야 같은 칸에 들어간다. (사이트관리/사이트대장.md 2절) */
 var SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbznAb0ZOODlNp-ckR5fvkqtVQijwuJ9Gl0G4KxDrfp-K7zM4fcfMMp5qDhAbwNkvYQG/exec";
 document.getElementById('consultForm').addEventListener('submit', function(e){
   e.preventDefault();
   var form = this;
   var val = function(id){ var el = document.getElementById(id); return el ? String(el.value).trim() : ''; };
   var payload = {
-    sheet: '공부의온도',
-    _form: '공부의온도-상담신청',
-    _page: location.hostname + location.pathname,
+    sheet: '지역과외',
+    _form: '인천과외',
     _time: new Date().toLocaleString('ko-KR'),
+    사이트: '인천과외', 지역: '인천광역시',
     이름: val('c_name'),
     연락처: val('c_phone'),
     학년: val('c_grade'),
-    희망방식: val('c_way'),
-    희망선생님: PICKED.name ? (PICKED.name + ' 선생님 (' + PICKED.id + ')') : '',
-    희망센터: PICKED.center
+    수업방식: val('c_way'),
+    남길말: [PICKED.name ? ('희망 선생님: ' + PICKED.name + ' (' + PICKED.id + ')') : '', PICKED.center ? ('희망 센터: ' + PICKED.center) : ''].filter(Boolean).join(' / '),
+    신청페이지: location.origin + location.pathname
   };
-  if(!payload.이름 || !payload.연락처 || !payload.학년 || !payload.희망방식){
+  if(!payload.이름 || !payload.연락처 || !payload.학년 || !payload.수업방식){
     alert('필수 항목을 모두 입력해 주세요.'); return;
   }
   var btn = form.querySelector('button[type="submit"]');
