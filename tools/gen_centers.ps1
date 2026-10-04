@@ -40,7 +40,7 @@ function ShortOf($n){
   return $n
 }
 $SCHOOL_MAP = @{}
-foreach($f in (Get-ChildItem "$SITE\school\*.html" -ErrorAction SilentlyContinue)){
+foreach($f in (Get-ChildItem "$SITE\school\*.html" -ErrorAction SilentlyContinue | Where-Object { $_.Name -notmatch '과외\.html$' })){   # …과외.html 은 2026-10-04 에 생긴 과목 페이지 — 학교 대조표에서 뺀다
   $full = $f.BaseName; $sh = ShortOf $full
   if(-not $SCHOOL_MAP.ContainsKey($sh)){ $SCHOOL_MAP[$sh] = $full }
   if($sh -like '인천*'){ $k2 = $sh.Substring(2); if($k2.Length -ge 2 -and -not $SCHOOL_MAP.ContainsKey($k2)){ $SCHOOL_MAP[$k2] = $full } }
