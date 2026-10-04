@@ -9,7 +9,7 @@
 $SITE = Split-Path $PSScriptRoot -Parent
 $OUT  = "$SITE\school"
 if(-not (Test-Path $OUT)){ New-Item -ItemType Directory $OUT | Out-Null }
-$V = '8'   # style.css 캐시버전 — 전 페이지와 같이 맞출 것
+$V = '10'   # style.css 캐시버전 — 전 페이지와 같이 맞출 것
 
 function Load-Js($path, $marker){
   $raw = Get-Content $path -Raw -Encoding UTF8
@@ -25,6 +25,12 @@ function J($w, $a, $b){ if(HasJong $w){ return "$w$a" } else { return "$w$b" } }
 # 약칭: 초등학교→초, 여자중학교→여중, 중학교→중, 여자고등학교→여고, 고등학교→고
 function Short($n){
   if($n -match '초등학교$'){ return ($n -replace '초등학교$','초') }
+  if($n -match '여자상업고등학교$'){ return ($n -replace '여자상업고등학교$','여상') }
+  if($n -match '외국어고등학교$'){ return ($n -replace '외국어고등학교$','외고') }
+  if($n -match '공업고등학교$'){ return ($n -replace '공업고등학교$','공고') }
+  if($n -match '상업고등학교$'){ return ($n -replace '상업고등학교$','상고') }
+  if($n -match '예술고등학교$'){ return ($n -replace '예술고등학교$','예고') }
+  if($n -match '체육고등학교$'){ return ($n -replace '체육고등학교$','체고') }
   if($n -match '여자중학교$'){ return ($n -replace '여자중학교$','여중') }
   if($n -match '중학교$'){ return ($n -replace '중학교$','중') }
   if($n -match '여자고등학교$'){ return ($n -replace '여자고등학교$','여고') }
@@ -63,7 +69,12 @@ function Head($p, $title, $desc, $canon, $ld){
 <meta property="og:description" content="$(Esc $desc)">
 <meta property="og:url" content="$canon">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="https://firststudy.co.kr/apple-touch-icon.png">
+<meta property="og:image" content="https://firststudy.co.kr/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="인천과외 — 방문과외·화상과외·학습센터">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://firststudy.co.kr/og-image.png">
 <link rel="icon" href="${p}favicon.ico" sizes="any">
 <link rel="icon" href="${p}favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="${p}apple-touch-icon.png">
@@ -174,9 +185,9 @@ foreach($s in $SCH){
   $n = $s.n; $a = $s.a; $gu = $s.gu; $lv = $s.t
   $area = "인천 $gu"
   $canon = "https://firststudy.co.kr/school/$(Enc $n).html"
-  $title = "$n 과외 | 인천 $gu $a 수학과외·영어과외·국어과외 — 인천과외"
+  $title = "$a 과외 | 인천 $gu $n 수학과외·영어과외·국어과외 — 인천과외"   # 2026-10-04: 약칭을 앞에 (사람들은 약칭으로 검색한다)
   $examNote = if($lv -eq '초'){ '단원평가·수행평가' } else { '중간·기말 내신' }
-  $desc  = "인천 $gu $n($a) 학생을 위한 1:1 맞춤 과외. 국어·영어·수학·사회·과학을 방문수업·화상수업으로, $examNote 까지 학교 시험 범위에 맞춰 준비합니다."
+  $desc  = "$a($n) 1:1 맞춤 과외. 인천 $gu $a 학생을 위해 국어·영어·수학·사회·과학을 방문수업·화상수업으로, $examNote 까지 학교 시험 범위에 맞춰 준비합니다."
 
   # 키워드 줄 (11개 사이트 형식)
   $kw = @('국어','영어','수학','사회','과학' | ForEach-Object { "$a $($_)과외" }) + @("$n 과외", "인천 $a 과외", "$gu $a 과외")
@@ -188,8 +199,8 @@ foreach($s in $SCH){
   foreach($sj in '국어','영어','수학','사회','과학'){
     $subjHtml += @"
         <div class="cd-subj">
-          <h3>$(Esc $n) $($sj)과외</h3>
-          <p>$($SUBJ[$sj][$lv])</p>
+          <h3>$(Esc $a) $($sj)과외</h3>
+          <p>$($SUBJ[$sj][$lv])</p>$(if($lv -ne '초' -or $sj -in '국어','영어','수학'){ "`n          <p style=""margin-top:10px""><a href=""$(Enc "$a-$($sj)과외").html"" style=""color:#B96A48;font-weight:700"">$(Esc $a) $($sj)과외 자세히 →</a></p>" })
         </div>
 
 "@
@@ -238,7 +249,7 @@ foreach($s in $SCH){
 
   # 인근 학교: 같은 구·같은 학교급
   $near = @($byGuType["$gu|$lv"] | Where-Object { $_.n -ne $n } | Select-Object -First 12)
-  $nearHtml = ($near | ForEach-Object { "          <a href=""$(Enc $_.n).html"">$(Esc $_.n) 과외</a>" }) -join "`n"
+  $nearHtml = ($near | ForEach-Object { "          <a href=""$(Enc $_.n).html"">$(Esc $_.a) 과외</a>" }) -join "`n"
   # 다른 학교급 한두 곳도 (초→중, 중→고 진학 연결)
   $nextLv = @{ '초'='중'; '중'='고'; '고'='' }[$lv]
   $nextHtml = ''
@@ -267,7 +278,7 @@ foreach($s in $SCH){
   <div class="wrap">
     <p class="sc-crumb"><a href="../index.html">인천과외</a> › <a href="../schools.html">학교별 과외</a> › <a href="../schools.html#$(Esc $gu)">$(Esc $gu)</a> › $(Esc $n)</p>
     <p class="eyebrow">인천 $(Esc $gu) · $($TYPE_NAME[$lv])</p>
-    <h1>$(Esc $n)<br><em>1:1 맞춤 과외</em></h1>
+    <h1>$(Esc $a) 과외<br><em>$(Esc $n) 1:1 맞춤 수업</em></h1>
     <p class="cd-lead">인천 $(Esc $gu) $(Esc $n)($(Esc $a)) 학생과 학부모님을 위한 과외 안내입니다. 국어·영어·수학·사회·과학을 방문수업이나 화상수업으로, 학교 시험 범위에 맞춰 1:1로 준비합니다.</p>
     <div class="sc-kw">$kwHtml</div>
   </div>
@@ -286,7 +297,7 @@ $gradeHtml
 
 <section style="background:var(--bg-soft)">
   <div class="wrap">
-    <h2 class="sec-title" style="text-align:center">$(Esc $n) 과목별 1:1 과외</h2>
+    <h2 class="sec-title" style="text-align:center">$(Esc $a) 과목별 1:1 과외</h2>
     <div class="cd-subjects">
 $subjHtml    </div>
   </div>
